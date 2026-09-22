@@ -1,1 +1,495 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KOROV.420 Menu</title>
+    <!-- Tailwind CSS pour le design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Script Officiel Telegram Mini App -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- Librairie pour générer le QR Code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body { 
+            background-color: #0b0b0e; 
+            color: #ffffff; 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .neon-border { box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); border: 1px solid #a855f7; }
+        .bottom-nav { background: rgba(11, 11, 14, 0.95); backdrop-filter: blur(10px); }
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+    </style>
+</head>
+<body class="pb-24">
 
+    <!-- HEADER: Logo et Infos -->
+    <header class="flex justify-between items-center p-4 border-b border-gray-800">
+        <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full border-2 border-purple-500 overflow-hidden relative">
+                <img src="https://i.ibb.co/4gsK2nLB/photo-2026-09-22-09-21-31.jpg" alt="Logo" class="w-full h-full object-cover">
+                <div class="absolute bottom-0 right-0 w-3 h-3 bg-[#39ff14] rounded-full border-2 border-[#0b0b0e]"></div>
+            </div>
+            <div>
+                <h1 class="font-bold text-lg leading-tight tracking-wide">DOC RICHTO</h1>
+                <p class="text-xs text-gray-400">1 produit · 1 catégorie</p>
+            </div>
+        </div>
+        <div class="bg-gray-800 px-3 py-1.5 rounded-lg text-sm border border-gray-700 flex items-center gap-1">
+            🇫🇷 <span class="text-[10px]">▼</span>
+        </div>
+    </header>
+
+    <!-- BANNIÈRE DE LIVRAISON -->
+    <div class="bg-purple-900/30 border-y border-purple-500/30 p-2 text-center text-xs text-purple-300 font-medium">
+        🚚 Livraison : Mardi, Vendredi et Dimanche (12h - 00h)
+    </div>
+
+    <!-- ONGLET 1 : LE CATALOGUE -->
+    <main id="tab-catalogue" class="tab-content active p-4">
+        <div class="rounded-2xl overflow-hidden mb-4 relative aspect-square neon-border">
+            <img src="https://i.ibb.co/4gsK2nLB/photo-2026-09-22-09-21-31.jpg" alt="Dry-Shift 120U" class="w-full h-full object-cover">
+            <div class="absolute top-3 left-3 bg-black/70 px-3 py-1 rounded-full text-xs font-bold backdrop-blur-md border border-gray-700">
+                DRY SIFT 🍇
+            </div>
+            <!-- Bouton Favori cliquable -->
+            <button id="favorite-btn" class="absolute top-3 right-3 bg-black/70 p-2.5 rounded-full text-white backdrop-blur-md border border-gray-700 transition-all hover:scale-110">
+                🤍
+            </button>
+        </div>
+        
+        <h2 class="text-2xl font-bold mb-1">Dry-Shift 120U</h2>
+        <p class="text-sm text-gray-400 mb-5 leading-relaxed">Qualité premium, filtré à 120 microns. Texture sableuse, odeur très prononcée. Frais de livraison offerts (0€).</p>
+        
+        <div class="grid grid-cols-2 gap-3 mb-6">
+            <button class="variant-btn border border-gray-700 rounded-xl p-3 text-center transition-all bg-gray-900 focus:border-purple-500 focus:bg-purple-900/20" data-gram="0.9g" data-price="10">
+                <div class="font-bold text-xl">0.9g</div><div class="text-gray-400 text-sm">10 €</div>
+            </button>
+            <button class="variant-btn border border-gray-700 rounded-xl p-3 text-center transition-all bg-gray-900 focus:border-purple-500 focus:bg-purple-900/20" data-gram="1.8g" data-price="20">
+                <div class="font-bold text-xl">1.8g</div><div class="text-gray-400 text-sm">20 €</div>
+            </button>
+            <button class="variant-btn border border-gray-700 rounded-xl p-3 text-center transition-all bg-gray-900 focus:border-purple-500 focus:bg-purple-900/20" data-gram="4.5g" data-price="50">
+                <div class="font-bold text-xl">4.5g</div><div class="text-gray-400 text-sm">50 €</div>
+            </button>
+            <button class="variant-btn border border-gray-700 rounded-xl p-3 text-center transition-all bg-gray-900 focus:border-purple-500 focus:bg-purple-900/20" data-gram="10g" data-price="110">
+                <div class="font-bold text-xl">10g</div><div class="text-gray-400 text-sm">110 €</div>
+            </button>
+            <button class="variant-btn border border-gray-700 rounded-xl p-3 text-center col-span-2 transition-all bg-gray-900 focus:border-purple-500 focus:bg-purple-900/20" data-gram="25g" data-price="230">
+                <div class="font-bold text-xl">25g</div><div class="text-gray-400 text-sm">230 €</div>
+            </button>
+        </div>
+
+        <div class="space-y-3 mt-4">
+            <button id="add-to-cart" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3.5 rounded-xl transition-all shadow-[0_0_15px_rgba(147,51,234,0.3)]">
+                🛒 Ajouter au panier
+            </button>
+            <button id="checkout-tg" class="w-full bg-[#24A1DE] hover:bg-[#1d8ece] text-white font-bold py-3.5 rounded-xl transition-all shadow-[0_0_15px_rgba(36,161,222,0.3)]">
+                ✈️ Commander directement
+            </button>
+        </div>
+    </main>
+
+    <!-- ONGLET 2 : LE PANIER -->
+    <main id="tab-panier" class="tab-content p-4">
+        <h2 class="text-2xl font-bold mb-4">🛒 Ton Panier</h2>
+        
+        <!-- Liste des articles -->
+        <div id="cart-items" class="space-y-3 mb-6 text-gray-400 text-center mt-10">
+            Ton panier est vide.
+        </div>
+
+        <!-- Formulaire Informations de Livraison & Télégramme -->
+        <div id="delivery-section" class="hidden bg-gray-900 border border-gray-800 rounded-2xl p-4 mb-6 space-y-4">
+            <div class="text-sm font-bold text-purple-400 mb-2 border-b border-gray-800 pb-2 flex justify-between items-center">
+                <span>📍 MODE DE RÉCEPTION</span>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-2">
+                <button id="btn-delivery" class="py-2 px-3 rounded-xl border border-purple-500 bg-purple-900/30 text-white font-bold text-xs flex items-center justify-center gap-1">
+                    🏠 Livraison
+                </button>
+                <button id="btn-meetup" class="py-2 px-3 rounded-xl border border-gray-700 bg-gray-800 text-gray-400 font-bold text-xs flex items-center justify-center gap-1">
+                    👥 Meetup
+                </button>
+            </div>
+
+            <div id="address-fields" class="space-y-3 pt-2">
+                <div>
+                    <label class="text-[10px] text-gray-400 uppercase font-bold block mb-1">Adresse de livraison</label>
+                    <input type="text" id="order-address" placeholder="Ex: 2 rue de la fontaine" class="w-full bg-gray-800 border border-gray-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-purple-500">
+                </div>
+                <div>
+                    <label class="text-[10px] text-gray-400 uppercase font-bold block mb-1">Code Postal</label>
+                    <input type="text" id="order-zip" placeholder="Ex: 25340" class="w-full bg-gray-800 border border-gray-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-purple-500">
+                </div>
+            </div>
+
+            <!-- Compte Telegram détecté pour la prise de commande -->
+            <div class="bg-purple-950/40 border border-purple-500/30 rounded-xl p-3">
+                <div class="text-[10px] text-purple-300 uppercase font-bold">Client Telegram (Prise de commande)</div>
+                <div class="text-sm font-bold text-white flex items-center gap-2 mt-1">
+                    <span id="order-user-display">Chargement...</span>
+                    <span class="text-[10px] bg-purple-600/50 text-purple-200 px-2 py-0.5 rounded-full font-normal">Auto-détecté</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Total et Bouton -->
+        <div id="cart-total-section" class="hidden mt-4">
+            <div class="flex justify-between items-center bg-gray-900 p-4 rounded-xl border border-gray-800 mb-4">
+                <span class="text-gray-400">Frais de livraison :</span>
+                <span class="text-[#39ff14] font-bold">0 €</span>
+            </div>
+            <div class="flex justify-between items-center text-xl font-bold mb-6">
+                <span>TOTAL :</span>
+                <span id="cart-total-price" class="text-purple-400">0 €</span>
+            </div>
+            <button id="checkout-cart-tg" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3.5 rounded-xl transition-all shadow-[0_0_15px_rgba(147,51,234,0.3)]">
+                ✈️ Valider la commande
+            </button>
+        </div>
+    </main>
+
+    <!-- ONGLET 3 : HISTORIQUE (Derniers vus) -->
+    <main id="tab-historique" class="tab-content p-4">
+        <h2 class="text-xl font-bold mb-4 text-purple-400">Derniers produits consultés</h2>
+        
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-3 flex gap-4 items-center">
+            <img src="https://i.ibb.co/4gsK2nLB/photo-2026-09-22-09-21-31.jpg" class="w-16 h-16 rounded-xl object-cover border border-gray-700">
+            <div>
+                <h3 class="font-bold text-lg">Dry-Shift 120U</h3>
+                <p class="text-xs text-gray-400 mt-1">Vu à l'instant</p>
+                <div class="text-purple-400 text-sm font-bold mt-1">À partir de 10 €</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ONGLET 4 : LE PROFIL -->
+    <main id="tab-profil" class="tab-content p-4">
+        <div class="bg-gray-900 rounded-3xl p-6 text-center border border-gray-800 relative mt-8 mb-6">
+            <div class="absolute -top-10 left-1/2 transform -translate-x-1/2">
+                <div class="w-20 h-20 rounded-full border-[3px] border-purple-500 overflow-hidden relative bg-gray-800 shadow-[0_0_15px_rgba(168,85,247,0.5)]">
+                    <img id="tg-avatar" src="https://i.ibb.co/4gsK2nLB/photo-2026-09-22-09-21-31.jpg" alt="User" class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 right-1 w-4 h-4 bg-[#39ff14] rounded-full border-2 border-gray-900"></div>
+                </div>
+            </div>
+            <h2 id="tg-name" class="text-xl font-bold mt-8">Korov.420 🍫 🍃</h2>
+            <p id="tg-username" class="text-sm text-gray-400 mt-1">@korov420</p>
+            <div class="mt-4 inline-flex items-center bg-[#15151a] rounded-xl px-4 py-1.5 border border-gray-800">
+                <span id="tg-id" class="text-xs font-mono text-gray-400">ID 8510763921</span> 
+                <span class="ml-3 pl-3 border-l border-gray-700 text-xs font-bold">FR</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 mb-6">
+            <div class="bg-gray-900 p-4 rounded-2xl border border-gray-800 flex items-center gap-4">
+                <div class="text-blue-500 text-2xl">🛒</div>
+                <div>
+                    <div class="text-2xl font-black" id="stat-panier">0</div>
+                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Panier</div>
+                </div>
+            </div>
+            <div class="bg-gray-900 p-4 rounded-2xl border border-gray-800 flex items-center gap-4">
+                <div class="text-yellow-500 text-2xl">🕒</div>
+                <div>
+                    <div class="text-2xl font-black">0</div>
+                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Commandes</div>
+                </div>
+            </div>
+            <div class="bg-gray-900 p-4 rounded-2xl border border-gray-800 flex items-center gap-4">
+                <div class="text-pink-500 text-2xl">🤍</div>
+                <div>
+                    <div class="text-2xl font-black" id="stat-favoris">0</div>
+                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Favoris</div>
+                </div>
+            </div>
+            <div class="bg-gray-900 p-4 rounded-2xl border border-gray-800 flex items-center gap-4">
+                <div class="text-green-500 text-2xl">📦</div>
+                <div>
+                    <div class="text-2xl font-black">1</div>
+                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Produits</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-3xl flex justify-center mb-4 relative w-3/4 mx-auto shadow-lg">
+            <div id="qrcode"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-12 h-12 bg-white rounded-xl p-1 shadow-md">
+                    <img src="https://i.ibb.co/4gsK2nLB/photo-2026-09-22-09-21-31.jpg" class="w-full h-full object-cover rounded-lg">
+                </div>
+            </div>
+        </div>
+        <button class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3.5 rounded-xl mb-8 shadow-[0_0_15px_rgba(147,51,234,0.3)] transition-all">
+            📥 Partager le QR code
+        </button>
+    </main>
+
+    <!-- BARRE DE NAVIGATION -->
+    <nav class="bottom-nav fixed bottom-0 left-0 w-full border-t border-gray-800 flex justify-around items-center px-2 py-2 text-[10px] text-gray-500 z-50">
+        <button class="nav-btn flex flex-col items-center p-2 transition hover:text-white text-purple-400" data-target="tab-catalogue">
+            <span class="text-xl mb-1">🗂</span> Menu
+        </button>
+        <button class="nav-btn flex flex-col items-center p-2 transition hover:text-white relative" data-target="tab-panier">
+            <span class="text-xl mb-1">🛒</span> Panier
+            <span id="cart-badge" class="absolute top-1 right-2 bg-purple-600 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+        </button>
+        <button class="nav-btn flex flex-col items-center p-2 transition hover:text-white" data-target="tab-historique">
+            <span class="text-xl mb-1">🕒</span> Historique
+        </button>
+        <button class="nav-btn flex flex-col items-center p-2 transition hover:text-white" data-target="tab-profil">
+            <div class="w-6 h-6 rounded-full border border-gray-500 overflow-hidden mb-1 nav-avatar-border">
+                <img id="nav-avatar" src="https://i.ibb.co/4gsK2nLB/photo-2026-09-22-09-21-31.jpg" class="w-full h-full object-cover">
+            </div>
+            Profil
+        </button>
+    </nav>
+
+    <!-- SCRIPTS -->
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+
+        // Identifiants Telegram
+        const botToken = "8894404240:AAGG7XGKpUXblwLVU0SYnVhsQGlHoKJKZKc";
+        const chatId = "8510763921";
+
+        let userTelegramInfo = {
+            name: "Client Inconnu",
+            username: "Pas d'username",
+            id: "N/A"
+        };
+
+        // Extraction de l'Utilisateur Telegram
+        if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+            const user = tg.initDataUnsafe.user;
+            userTelegramInfo.name = user.first_name + (user.last_name ? " " + user.last_name : "");
+            userTelegramInfo.username = user.username ? "@" + user.username : "Pas d'username";
+            userTelegramInfo.id = user.id;
+
+            document.getElementById('tg-name').innerText = userTelegramInfo.name;
+            document.getElementById('tg-username').innerText = userTelegramInfo.username;
+            document.getElementById('tg-id').innerText = "ID " + userTelegramInfo.id;
+            
+            if(user.photo_url) {
+                document.getElementById('tg-avatar').src = user.photo_url;
+                document.getElementById('nav-avatar').src = user.photo_url;
+            }
+        }
+
+        // Mettre à jour le texte du client dans l'onglet panier
+        document.getElementById('order-user-display').innerText = `${userTelegramInfo.name} (${userTelegramInfo.username})`;
+
+        // Gestion des Favoris
+        let isFavorite = false;
+        const favoriteBtn = document.getElementById('favorite-btn');
+        const statFavoris = document.getElementById('stat-favoris');
+
+        favoriteBtn.addEventListener('click', () => {
+            isFavorite = !isFavorite;
+            if (isFavorite) {
+                favoriteBtn.innerText = "❤️";
+                statFavoris.innerText = "1";
+                tg.showAlert("❤️ Ajouté aux favoris !");
+            } else {
+                favoriteBtn.innerText = "🤍";
+                statFavoris.innerText = "0";
+                tg.showAlert("🤍 Retiré des favoris.");
+            }
+        });
+
+        // Gestion du Mode Livraison / Meetup
+        let selectedMode = 'Livraison';
+        const btnDelivery = document.getElementById('btn-delivery');
+        const btnMeetup = document.getElementById('btn-meetup');
+        const addressfields = document.getElementById('address-fields');
+
+        btnDelivery.addEventListener('click', () => {
+            selectedMode = 'Livraison';
+            btnDelivery.className = "py-2 px-3 rounded-xl border border-purple-500 bg-purple-900/30 text-white font-bold text-xs flex items-center justify-center gap-1";
+            btnMeetup.className = "py-2 px-3 rounded-xl border border-gray-700 bg-gray-800 text-gray-400 font-bold text-xs flex items-center justify-center gap-1";
+            document.getElementById('address-fields').classList.remove('hidden');
+        });
+
+        btnMeetup.addEventListener('click', () => {
+            selectedMode = 'Meetup';
+            btnMeetup.className = "py-2 px-3 rounded-xl border border-purple-500 bg-purple-900/30 text-white font-bold text-xs flex items-center justify-center gap-1";
+            btnDelivery.className = "py-2 px-3 rounded-xl border border-gray-700 bg-gray-800 text-gray-400 font-bold text-xs flex items-center justify-center gap-1";
+            document.getElementById('address-fields').classList.add('hidden');
+        });
+
+        // QR Code (vrai bot krv420_bot)
+        new QRCode(document.getElementById("qrcode"), {
+            text: "https://t.me/krv420_bot",
+            width: 160, height: 160,
+            colorDark : "#000000", colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+
+        // Navigation dynamique entre onglets
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const targetId = e.currentTarget.getAttribute('data-target');
+                
+                document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+                document.getElementById(targetId).classList.add('active');
+                
+                document.querySelectorAll('.nav-btn').forEach(b => {
+                    b.classList.remove('text-purple-400');
+                    b.querySelector('.nav-avatar-border')?.classList.replace('border-purple-500', 'border-gray-500');
+                });
+                e.currentTarget.classList.add('text-purple-400');
+                e.currentTarget.querySelector('.nav-avatar-border')?.classList.replace('border-gray-500', 'border-purple-500');
+            });
+        });
+
+        // Logique du Catalogue (Sélection de grammage)
+        let selectedGram = null;
+        let selectedPrice = 0;
+        let cart = [];
+
+        document.querySelectorAll('.variant-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.variant-btn').forEach(b => {
+                    b.classList.remove('border-purple-500', 'bg-purple-900/20');
+                    b.classList.add('border-gray-700', 'bg-gray-900');
+                });
+                const target = e.currentTarget;
+                target.classList.remove('border-gray-700', 'bg-gray-900');
+                target.classList.add('border-purple-500', 'bg-purple-900/20');
+                
+                selectedGram = target.getAttribute('data-gram');
+                selectedPrice = parseInt(target.getAttribute('data-price'));
+            });
+        });
+
+        // Fonction pour mettre à jour l'affichage du Panier
+        function updateCartUI() {
+            const cartBadge = document.getElementById('cart-badge');
+            const statPanier = document.getElementById('stat-panier');
+            const cartItemsDiv = document.getElementById('cart-items');
+            const cartTotalSection = document.getElementById('cart-total-section');
+            const deliverySection = document.getElementById('delivery-section');
+            const cartTotalPrice = document.getElementById('cart-total-price');
+
+            if(cart.length > 0) {
+                cartBadge.classList.remove('hidden');
+                cartBadge.innerText = cart.length;
+                statPanier.innerText = cart.length;
+                cartTotalSection.classList.remove('hidden');
+                deliverySection.classList.remove('hidden');
+                
+                let html = "";
+                let total = 0;
+                cart.forEach((item, index) => {
+                    total += item.price;
+                    html += `
+                    <div class="bg-gray-900 border border-gray-800 rounded-xl p-4 flex justify-between items-center text-left">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.ibb.co/4gsK2nLB/photo-2026-09-22-09-21-31.jpg" class="w-10 h-10 rounded-lg object-cover">
+                            <div>
+                                <div class="font-bold text-white">${item.name}</div>
+                                <div class="text-xs text-gray-400">Quantité : <span class="text-white">${item.gram}</span></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="font-bold text-purple-400">${item.price} €</span>
+                            <button onclick="removeFromCart(${index})" class="text-gray-500 hover:text-red-400 text-sm">🗑️</button>
+                        </div>
+                    </div>`;
+                });
+                cartItemsDiv.classList.remove('text-center', 'mt-10');
+                cartItemsDiv.innerHTML = html;
+                cartTotalPrice.innerText = total + " €";
+            } else {
+                cartBadge.classList.add('hidden');
+                statPanier.innerText = "0";
+                cartTotalSection.classList.add('hidden');
+                deliverySection.classList.add('hidden');
+                cartItemsDiv.classList.add('text-center', 'mt-10');
+                cartItemsDiv.innerHTML = "Ton panier est vide.";
+            }
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        // Ajouter au panier
+        document.getElementById('add-to-cart').addEventListener('click', () => {
+            if(!selectedGram) {
+                tg.showAlert("⚠️ Choisis d'abord une quantité (ex: 4.5g).");
+                return;
+            }
+            cart.push({ name: "Dry-Shift 120U", gram: selectedGram, price: selectedPrice });
+            updateCartUI();
+            tg.showAlert(`✅ Ajouté au panier !\n\n1x Dry-Shift 120U (${selectedGram})`);
+        });
+
+        // Envoi au bot Telegram
+        function sendOrderToTelegram(details, total) {
+            const address = document.getElementById('order-address').value || 'Non renseignée';
+            const zip = document.getElementById('order-zip').value || 'Non renseigné';
+
+            let deliveryDetails = `📍 Mode : ${selectedMode}\n`;
+            if (selectedMode === 'Livraison') {
+                deliveryDetails += `🏠 Adresse : ${address}\n📮 Code Postal : ${zip}\n`;
+            }
+
+            const userInfoText = `👤 Client : ${userTelegramInfo.name}\n✈️ Telegram : ${userTelegramInfo.username}\n🆔 ID : ${userTelegramInfo.id}`;
+
+            const messageText = `🚨 NOUVELLE COMMANDE !\n\n${details}\n💶 TOTAL : ${total} €\n\n${deliveryDetails}\n${userInfoText}\n\n🚚 Livraison : 0 € (OFFERT)\n📅 Créneaux dispo : Mardi, Vendredi ou Dimanche (12h-00h)\n\nVia Menu KOROV.420`;
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ chat_id: chatId, text: messageText })
+            }).then(response => {
+                if(response.ok) {
+                    tg.showAlert("✅ Ta commande a été envoyée avec succès ! L'équipe va te contacter.");
+                    setTimeout(() => { tg.close(); }, 2500);
+                } else { 
+                    tg.showAlert("❌ Erreur lors de l'envoi. Réessaie."); 
+                }
+            }).catch(err => { 
+                tg.showAlert("❌ Erreur réseau."); 
+            });
+        }
+
+        // Commander directement (1 item)
+        document.getElementById('checkout-tg').addEventListener('click', () => {
+            if(!selectedGram) {
+                tg.showAlert("⚠️ Choisis une quantité avant de commander.");
+                return;
+            }
+            let details = `📦 Produit : Dry-Shift 120U\n⚖️ Quantité : ${selectedGram}\n💶 Prix unitaire : ${selectedPrice} €\n`;
+            sendOrderToTelegram(details, selectedPrice);
+        });
+
+        // Commander depuis le panier
+        document.getElementById('checkout-cart-tg').addEventListener('click', () => {
+            if(cart.length === 0) return;
+            
+            if (selectedMode === 'Livraison') {
+                const addr = document.getElementById('order-address').value.trim();
+                if(!addr) {
+                    tg.showAlert("⚠️ Indique ton adresse de livraison.");
+                    return;
+                }
+            }
+
+            let details = "";
+            let total = 0;
+            cart.forEach((item, i) => {
+                details += `📦 Article ${i+1}: ${item.name} (${item.gram}) - ${item.price} €\n`;
+                total += item.price;
+            });
+            sendOrderToTelegram(details, total);
+        });
+    </script>
+</body>
+</html>
