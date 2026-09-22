@@ -277,7 +277,6 @@
             id: "N/A"
         };
 
-        // Extraction de l'Utilisateur Telegram
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
             const user = tg.initDataUnsafe.user;
             userTelegramInfo.name = user.first_name + (user.last_name ? " " + user.last_name : "");
@@ -294,11 +293,10 @@
             }
         }
 
-        // Mettre à jour le texte du client dans l'onglet panier
         document.getElementById('order-user-display').innerText = `${userTelegramInfo.name} (${userTelegramInfo.username})`;
 
-        // Gestion des Favoris
-        let favorites = [];
+        // --- GESTION DES FAVORIS AVEC MÉMOIRE LOCALE (LocalStorage) ---
+        let favorites = JSON.parse(localStorage.getItem('korov_favorites')) || [];
         const favoriteBtn = document.getElementById('favorite-btn');
         const statFavoris = document.getElementById('stat-favoris');
         const favoritesModal = document.getElementById('favorites-modal');
@@ -312,6 +310,18 @@
             image: "https://i.ibb.co/4gsK2nLB/photo-2026-09-22-09-21-31.jpg"
         };
 
+        // Fonction pour mettre à jour l'affichage du bouton cœur et du compteur au démarrage
+        function updateFavoritesUI() {
+            const isFav = favorites.some(p => p.name === productData.name);
+            if (isFav) {
+                favoriteBtn.innerText = "❤️";
+            } else {
+                favoriteBtn.innerText = "🤍";
+            }
+            statFavoris.innerText = favorites.length;
+        }
+        updateFavoritesUI();
+
         favoriteBtn.addEventListener('click', () => {
             const index = favorites.findIndex(p => p.name === productData.name);
             if (index === -1) {
@@ -323,10 +333,11 @@
                 favoriteBtn.innerText = "🤍";
                 tg.showAlert("🤍 Retiré des favoris.");
             }
+            // Sauvegarde dans la mémoire du téléphone
+            localStorage.setItem('korov_favorites', JSON.stringify(favorites));
             statFavoris.innerText = favorites.length;
         });
 
-        // Ouvrir/Fermer la fenêtre des favoris depuis le profil
         openFavoritesModalBtn.addEventListener('click', () => {
             if (favorites.length === 0) {
                 tg.showAlert("🤍 Tu n'as aucun produit en favoris pour l'instant.");
@@ -359,6 +370,9 @@
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.getElementById('tab-catalogue').classList.add('active');
         }
+
+        // --- GESTION DU PANIER AVEC MÉMOIRE LOCALE ---
+        let cart = JSON.parse(localStorage.getItem('korov_cart')) || [];
 
         // Gestion du Mode Livraison / Meetup
         let selectedMode = 'Livraison';
@@ -407,7 +421,6 @@
         // Logique du Catalogue (Sélection de grammage)
         let selectedGram = null;
         let selectedPrice = 0;
-        let cart = [];
 
         document.querySelectorAll('.variant-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -432,6 +445,9 @@
             const cartTotalSection = document.getElementById('cart-total-section');
             const deliverySection = document.getElementById('delivery-section');
             const cartTotalPrice = document.getElementById('cart-total-price');
+
+            // Sauvegarde dans la mémoire locale
+            localStorage.setItem('korov_cart', JSON.stringify(cart));
 
             if(cart.length > 0) {
                 cartBadge.classList.remove('hidden');
@@ -472,6 +488,9 @@
             }
         }
 
+        // Lancer la mise à jour du panier au chargement de la page
+        updateCartUI();
+
         function removeFromCart(index) {
             cart.splice(index, 1);
             updateCartUI();
@@ -508,6 +527,9 @@
                 body: JSON.stringify({ chat_id: chatId, text: messageText })
             }).then(response => {
                 if(response.ok) {
+                    // Vider le panier après commande réussie
+                    cart = [];
+                    updateCartUI();
                     tg.showAlert("✅ Ta commande a été envoyée avec succès ! L'équipe va te contacter.");
                     setTimeout(() => { tg.close(); }, 2500);
                 } else { 
