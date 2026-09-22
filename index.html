@@ -199,13 +199,14 @@
                     <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Commandes</div>
                 </div>
             </div>
-            <div class="bg-gray-900 p-4 rounded-2xl border border-gray-800 flex items-center gap-4">
+            <!-- Bouton cliquable pour voir les favoris -->
+            <button id="open-favorites-modal" class="bg-gray-900 p-4 rounded-2xl border border-gray-800 flex items-center gap-4 text-left hover:border-purple-500/50 transition-all w-full">
                 <div class="text-pink-500 text-2xl">🤍</div>
                 <div>
                     <div class="text-2xl font-black" id="stat-favoris">0</div>
-                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Favoris</div>
+                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Favoris ↗</div>
                 </div>
-            </div>
+            </button>
             <div class="bg-gray-900 p-4 rounded-2xl border border-gray-800 flex items-center gap-4">
                 <div class="text-green-500 text-2xl">📦</div>
                 <div>
@@ -227,6 +228,19 @@
             📥 Partager le QR code
         </button>
     </main>
+
+    <!-- MODAL / SECTION DES FAVORIS -->
+    <div id="favorites-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-gray-900 border border-gray-800 rounded-3xl w-full max-w-md p-5 relative max-h-[80vh] flex flex-col">
+            <div class="flex justify-between items-center mb-4 border-b border-gray-800 pb-3">
+                <h3 class="font-bold text-lg text-purple-400">🤍 Tes Produits Favoris</h3>
+                <button id="close-favorites-modal" class="text-gray-400 hover:text-white text-xl font-bold px-2">✕</button>
+            </div>
+            <div id="favorites-list-container" class="space-y-3 overflow-y-auto flex-1">
+                <!-- Rempli dynamiquement -->
+            </div>
+        </div>
+    </div>
 
     <!-- BARRE DE NAVIGATION -->
     <nav class="bottom-nav fixed bottom-0 left-0 w-full border-t border-gray-800 flex justify-around items-center px-2 py-2 text-[10px] text-gray-500 z-50">
@@ -284,28 +298,72 @@
         document.getElementById('order-user-display').innerText = `${userTelegramInfo.name} (${userTelegramInfo.username})`;
 
         // Gestion des Favoris
-        let isFavorite = false;
+        let favorites = [];
         const favoriteBtn = document.getElementById('favorite-btn');
         const statFavoris = document.getElementById('stat-favoris');
+        const favoritesModal = document.getElementById('favorites-modal');
+        const openFavoritesModalBtn = document.getElementById('open-favorites-modal');
+        const closeFavoritesModalBtn = document.getElementById('close-favorites-modal');
+        const favoritesListContainer = document.getElementById('favorites-list-container');
+
+        const productData = {
+            name: "Dry-Shift 120U",
+            price: "À partir de 10 €",
+            image: "https://i.ibb.co/4gsK2nLB/photo-2026-09-22-09-21-31.jpg"
+        };
 
         favoriteBtn.addEventListener('click', () => {
-            isFavorite = !isFavorite;
-            if (isFavorite) {
+            const index = favorites.findIndex(p => p.name === productData.name);
+            if (index === -1) {
+                favorites.push(productData);
                 favoriteBtn.innerText = "❤️";
-                statFavoris.innerText = "1";
                 tg.showAlert("❤️ Ajouté aux favoris !");
             } else {
+                favorites.splice(index, 1);
                 favoriteBtn.innerText = "🤍";
-                statFavoris.innerText = "0";
                 tg.showAlert("🤍 Retiré des favoris.");
             }
+            statFavoris.innerText = favorites.length;
         });
+
+        // Ouvrir/Fermer la fenêtre des favoris depuis le profil
+        openFavoritesModalBtn.addEventListener('click', () => {
+            if (favorites.length === 0) {
+                tg.showAlert("🤍 Tu n'as aucun produit en favoris pour l'instant.");
+                return;
+            }
+            let html = "";
+            favorites.forEach(item => {
+                html += `
+                <div class="bg-gray-800 border border-gray-700 rounded-2xl p-3 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <img src="${item.image}" class="w-12 h-12 rounded-xl object-cover border border-gray-600">
+                        <div>
+                            <h4 class="font-bold text-white text-sm">${item.name}</h4>
+                            <p class="text-purple-400 text-xs font-bold mt-0.5">${item.price}</p>
+                        </div>
+                    </div>
+                    <button onclick="goToCatalogue()" class="bg-purple-600 text-white text-xs font-bold px-3 py-2 rounded-xl">Voir</button>
+                </div>`;
+            });
+            favoritesListContainer.innerHTML = html;
+            favoritesModal.classList.remove('hidden');
+        });
+
+        closeFavoritesModalBtn.addEventListener('click', () => {
+            favoritesModal.classList.add('hidden');
+        });
+
+        function goToCatalogue() {
+            favoritesModal.classList.add('hidden');
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('tab-catalogue').classList.add('active');
+        }
 
         // Gestion du Mode Livraison / Meetup
         let selectedMode = 'Livraison';
         const btnDelivery = document.getElementById('btn-delivery');
         const btnMeetup = document.getElementById('btn-meetup');
-        const addressfields = document.getElementById('address-fields');
 
         btnDelivery.addEventListener('click', () => {
             selectedMode = 'Livraison';
@@ -321,7 +379,7 @@
             document.getElementById('address-fields').classList.add('hidden');
         });
 
-        // QR Code (vrai bot krv420_bot)
+        // QR Code
         new QRCode(document.getElementById("qrcode"), {
             text: "https://t.me/krv420_bot",
             width: 160, height: 160,
