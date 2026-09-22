@@ -615,17 +615,23 @@
             correctLevel : QRCode.CorrectLevel.H
         });
 
+        // --- NAVIGATION ENTRE LES ONGLETS (CORRIGÉE) ---
         document.querySelectorAll('.nav-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const targetId = e.currentTarget.getAttribute('data-target');
                 
+                // Masquer tous les onglets
                 document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+                // Afficher l'onglet cible
                 document.getElementById(targetId).classList.add('active');
                 
+                // Réinitialiser le style de tous les boutons de la barre
                 document.querySelectorAll('.nav-btn').forEach(b => {
                     b.classList.remove('text-purple-400');
                     b.querySelector('.nav-avatar-border')?.classList.replace('border-purple-500', 'border-gray-500');
                 });
+                
+                // Activer le style sur le bouton cliqué
                 e.currentTarget.classList.add('text-purple-400');
                 e.currentTarget.querySelector('.nav-avatar-border')?.classList.replace('border-gray-500', 'border-purple-500');
             });
