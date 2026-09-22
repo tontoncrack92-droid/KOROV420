@@ -192,13 +192,14 @@
                     <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Panier</div>
                 </div>
             </div>
-            <div class="bg-gray-900 p-4 rounded-2xl border border-gray-800 flex items-center gap-4">
+            <!-- Bouton cliquable pour voir les commandes des 24h -->
+            <button id="open-orders-modal" class="bg-gray-900 p-4 rounded-2xl border border-gray-800 flex items-center gap-4 text-left hover:border-purple-500/50 transition-all w-full">
                 <div class="text-yellow-500 text-2xl">🕒</div>
                 <div>
-                    <div class="text-2xl font-black">0</div>
-                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Commandes</div>
+                    <div class="text-2xl font-black" id="stat-commandes">0</div>
+                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Commandes (24h) ↗</div>
                 </div>
-            </div>
+            </button>
             <!-- Bouton cliquable pour voir les favoris -->
             <button id="open-favorites-modal" class="bg-gray-900 p-4 rounded-2xl border border-gray-800 flex items-center gap-4 text-left hover:border-purple-500/50 transition-all w-full">
                 <div class="text-pink-500 text-2xl">🤍</div>
@@ -237,6 +238,20 @@
                 <button id="close-favorites-modal" class="text-gray-400 hover:text-white text-xl font-bold px-2">✕</button>
             </div>
             <div id="favorites-list-container" class="space-y-3 overflow-y-auto flex-1">
+                <!-- Rempli dynamiquement -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL / SECTION DE L'HISTORIQUE DES COMMANDES (24H) -->
+    <div id="orders-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-gray-900 border border-gray-800 rounded-3xl w-full max-w-md p-5 relative max-h-[80vh] flex flex-col">
+            <div class="flex justify-between items-center mb-2 border-b border-gray-800 pb-3">
+                <h3 class="font-bold text-lg text-yellow-400">🕒 Commandes (24h)</h3>
+                <button id="close-orders-modal" class="text-gray-400 hover:text-white text-xl font-bold px-2">✕</button>
+            </div>
+            <p class="text-xs text-gray-400 mb-4">Ces commandes se réinitialisent automatiquement toutes les 24 heures.</p>
+            <div id="orders-list-container" class="space-y-3 overflow-y-auto flex-1">
                 <!-- Rempli dynamiquement -->
             </div>
         </div>
@@ -294,6 +309,86 @@
         }
 
         document.getElementById('order-user-display').innerText = `${userTelegramInfo.name} (${userTelegramInfo.username})`;
+
+        // --- GESTION DES COMMANDES (RESET AUTOMATIQUE TOUTES LES 24H + HISTORIQUE) ---
+        function checkAndResetOrders() {
+            const now = new Date().getTime();
+            const savedTime = localStorage.getItem('korov_orders_time');
+            const twentyFourHours = 24 * 60 * 60 * 1000; // 24h en millisecondes
+
+            if (!savedTime || (now - savedTime) > twentyFourHours) {
+                // Si plus de 24h ou première fois, on remet tout à 0 et on vide l'historique des commandes 24h
+                localStorage.setItem('korov_orders_count', '0');
+                localStorage.setItem('korov_orders_time', now.toString());
+                localStorage.setItem('korov_orders_history', JSON.stringify([]));
+            }
+        }
+        checkAndResetOrders();
+
+        function updateOrdersUI() {
+            const count = localStorage.getItem('korov_orders_count') || '0';
+            document.getElementById('stat-commandes').innerText = count;
+        }
+        updateOrdersUI();
+
+        // Fonction pour enregistrer la commande dans l'historique et incrémenter le compteur
+        function addOrderToHistory(orderDetails, totalAmount, mode) {
+            checkAndResetOrders();
+            
+            let currentCount = parseInt(localStorage.getItem('korov_orders_count') || '0');
+            currentCount += 1;
+            localStorage.setItem('korov_orders_count', currentCount.toString());
+
+            let history = JSON.parse(localStorage.getItem('korov_orders_history')) || [];
+            const nowTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            history.unshift({
+                time: nowTime,
+                details: orderDetails,
+                total: totalAmount,
+                mode: mode
+            });
+
+            localStorage.setItem('korov_orders_history', JSON.stringify(history));
+            updateOrdersUI();
+        }
+
+        // --- GESTION DE LA MODALE DES COMMANDES ---
+        const ordersModal = document.getElementById('orders-modal');
+        const openOrdersModalBtn = document.getElementById('open-orders-modal');
+        const closeOrdersModalBtn = document.getElementById('close-orders-modal');
+        const ordersListContainer = document.getElementById('orders-list-container');
+
+        openOrdersModalBtn.addEventListener('click', () => {
+            checkAndResetOrders();
+            const history = JSON.parse(localStorage.getItem('korov_orders_history')) || [];
+            
+            if (history.length === 0) {
+                ordersListContainer.innerHTML = `<div class="text-center text-gray-400 py-6 text-sm">Aucune commande validée ces dernières 24h.</div>`;
+            } else {
+                let html = "";
+                history.forEach((ord, index) => {
+                    html += `
+                    <div class="bg-gray-800 border border-gray-700 rounded-2xl p-4 space-y-2">
+                        <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                            <span class="text-xs font-bold text-yellow-400">Commande #${history.length - index}</span>
+                            <span class="text-[10px] text-gray-400">${ord.time} (${ord.mode})</span>
+                        </div>
+                        <div class="text-xs text-gray-300 whitespace-pre-line">${ord.details}</div>
+                        <div class="flex justify-between items-center pt-1 font-bold text-sm">
+                            <span class="text-gray-400">Total :</span>
+                            <span class="text-purple-400">${ord.total} €</span>
+                        </div>
+                    </div>`;
+                });
+                ordersListContainer.innerHTML = html;
+            }
+            ordersModal.classList.remove('hidden');
+        });
+
+        closeOrdersModalBtn.addEventListener('click', () => {
+            ordersModal.classList.add('hidden');
+        });
 
         // --- GESTION DES FAVORIS AVEC MÉMOIRE LOCALE (LocalStorage) ---
         let favorites = JSON.parse(localStorage.getItem('korov_favorites')) || [];
@@ -497,7 +592,7 @@
             tg.showAlert(`✅ Ajouté au panier !\n\n1x Dry-Shift 120U (${selectedGram})`);
         });
 
-        function sendOrderToTelegram(details, total) {
+        function sendOrderToTelegram(detailsSummary, detailsFullText, total) {
             const address = document.getElementById('order-address').value || 'Non renseignée';
             const zip = document.getElementById('order-zip').value || 'Non renseigné';
 
@@ -508,7 +603,7 @@
 
             const userInfoText = `👤 Client : ${userTelegramInfo.name}\n✈️ Telegram : ${userTelegramInfo.username}\n🆔 ID : ${userTelegramInfo.id}`;
 
-            const messageText = `🚨 NOUVELLE COMMANDE !\n\n${details}\n💶 TOTAL : ${total} €\n\n${deliveryDetails}\n${userInfoText}\n\n🚚 Livraison : 0 € (OFFERT)\n📅 Créneaux dispo : Mardi, Vendredi ou Dimanche (12h-00h)\n\nVia Menu KOROV.420`;
+            const messageText = `🚨 NOUVELLE COMMANDE !\n\n${detailsFullText}\n💶 TOTAL : ${total} €\n\n${deliveryDetails}\n${userInfoText}\n\n🚚 Livraison : 0 € (OFFERT)\n📅 Créneaux dispo : Mardi, Vendredi ou Dimanche (12h-00h)\n\nVia Menu KOROV.420`;
 
             fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: 'POST',
@@ -516,6 +611,10 @@
                 body: JSON.stringify({ chat_id: chatId, text: messageText })
             }).then(response => {
                 if(response.ok) {
+                    // On enregistre dans l'historique 24h du profil
+                    addOrderToHistory(detailsSummary, total, selectedMode);
+                    
+                    // Vider le panier
                     cart = [];
                     updateCartUI();
                     tg.showAlert("✅ Ta commande a été envoyée avec succès ! L'équipe va te contacter.");
@@ -533,8 +632,9 @@
                 tg.showAlert("⚠️ Choisis une quantité avant de commander.");
                 return;
             }
-            let details = `📦 Produit : Dry-Shift 120U\n⚖️ Quantité : ${selectedGram}\n💶 Prix unitaire : ${selectedPrice} €\n`;
-            sendOrderToTelegram(details, selectedPrice);
+            let detailsSummary = `📦 Dry-Shift 120U (${selectedGram})`;
+            let detailsFullText = `📦 Produit : Dry-Shift 120U\n⚖️ Quantité : ${selectedGram}\n💶 Prix unitaire : ${selectedPrice} €\n`;
+            sendOrderToTelegram(detailsSummary, detailsFullText, selectedPrice);
         });
 
         document.getElementById('checkout-cart-tg').addEventListener('click', () => {
@@ -548,13 +648,15 @@
                 }
             }
 
-            let details = "";
+            let detailsSummary = "";
+            let detailsFullText = "";
             let total = 0;
             cart.forEach((item, i) => {
-                details += `📦 Article ${i+1}: ${item.name} (${item.gram}) - ${item.price} €\n`;
+                detailsSummary += `• ${item.name} (${item.gram}) - ${item.price}€\n`;
+                detailsFullText += `📦 Article ${i+1}: ${item.name} (${item.gram}) - ${item.price} €\n`;
                 total += item.price;
             });
-            sendOrderToTelegram(details, total);
+            sendOrderToTelegram(detailsSummary.trim(), detailsFullText, total);
         });
     </script>
 </body>
