@@ -35,16 +35,18 @@
             </div>
             <div>
                 <h1 class="font-bold text-lg leading-tight tracking-wide">KOROV.420</h1>
-                <p class="text-xs text-gray-400">1 produit · 1 catégorie</p>
+                <p id="txt-header-sub" class="text-xs text-gray-400">1 produit · 1 catégorie</p>
             </div>
         </div>
-        <div class="bg-gray-800 px-3 py-1.5 rounded-lg text-sm border border-gray-700 flex items-center gap-1">
-            🇫🇷 <span class="text-[10px]">▼</span>
-        </div>
+        <!-- Sélecteur de langue cliquable -->
+        <select id="language-select" class="bg-gray-800 text-white px-3 py-1.5 rounded-lg text-sm border border-gray-700 outline-none cursor-pointer">
+            <option value="fr">🇫🇷 FR</option>
+            <option value="en">🇬🇧 EN</option>
+        </select>
     </header>
 
     <!-- BANNIÈRE DE LIVRAISON -->
-    <div class="bg-purple-900/30 border-y border-purple-500/30 p-2 text-center text-xs text-purple-300 font-medium">
+    <div id="txt-banner" class="bg-purple-900/30 border-y border-purple-500/30 p-2 text-center text-xs text-purple-300 font-medium">
         🚚 Livraison : Mardi, Vendredi et Dimanche (12h - 00h)
     </div>
 
@@ -62,7 +64,7 @@
         </div>
         
         <h2 class="text-2xl font-bold mb-1">Dry-Shift 120U</h2>
-        <p class="text-sm text-gray-400 mb-5 leading-relaxed">Qualité premium, filtré à 120 microns. Texture sableuse, odeur très prononcée. Frais de livraison offerts (0€).</p>
+        <p id="txt-prod-desc" class="text-sm text-gray-400 mb-5 leading-relaxed">Qualité premium, filtré à 120 microns. Texture sableuse, odeur très prononcée. Frais de livraison offerts (0€).</p>
         
         <div class="grid grid-cols-2 gap-3 mb-6">
             <button class="variant-btn border border-gray-700 rounded-xl p-3 text-center transition-all bg-gray-900 focus:border-purple-500 focus:bg-purple-900/20" data-gram="0.9g" data-price="10">
@@ -84,55 +86,55 @@
 
         <div class="space-y-3 mt-4">
             <button id="add-to-cart" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3.5 rounded-xl transition-all shadow-[0_0_15px_rgba(147,51,234,0.3)]">
-                🛒 Ajouter au panier
+                🛒 <span data-i18n="add_to_cart">Ajouter au panier</span>
             </button>
             <button id="checkout-tg" class="w-full bg-[#24A1DE] hover:bg-[#1d8ece] text-white font-bold py-3.5 rounded-xl transition-all shadow-[0_0_15px_rgba(36,161,222,0.3)]">
-                ✈️ Commander directement
+                ✈️ <span data-i18n="order_direct">Commander directement</span>
             </button>
         </div>
     </main>
 
     <!-- ONGLET 2 : LE PANIER -->
     <main id="tab-panier" class="tab-content p-4">
-        <h2 class="text-2xl font-bold mb-4">🛒 Ton Panier</h2>
+        <h2 class="text-2xl font-bold mb-4" data-i18n="cart_title">🛒 Ton Panier</h2>
         
         <!-- Liste des articles -->
-        <div id="cart-items" class="space-y-3 mb-6 text-gray-400 text-center mt-10">
+        <div id="cart-items" class="space-y-3 mb-6 text-gray-400 text-center mt-10" data-i18n="cart_empty">
             Ton panier est vide.
         </div>
 
         <!-- Formulaire Informations de Livraison & Télégramme -->
         <div id="delivery-section" class="hidden bg-gray-900 border border-gray-800 rounded-2xl p-4 mb-6 space-y-4">
             <div class="text-sm font-bold text-purple-400 mb-2 border-b border-gray-800 pb-2 flex justify-between items-center">
-                <span>📍 MODE DE RÉCEPTION</span>
+                <span data-i18n="mode_reception">📍 MODE DE RÉCEPTION</span>
             </div>
             
             <div class="grid grid-cols-2 gap-2">
                 <button id="btn-delivery" class="py-2 px-3 rounded-xl border border-purple-500 bg-purple-900/30 text-white font-bold text-xs flex items-center justify-center gap-1">
-                    🏠 Livraison
+                    🏠 <span data-i18n="mode_delivery">Livraison</span>
                 </button>
                 <button id="btn-meetup" class="py-2 px-3 rounded-xl border border-gray-700 bg-gray-800 text-gray-400 font-bold text-xs flex items-center justify-center gap-1">
-                    👥 Meetup
+                    👥 <span data-i18n="mode_meetup">Meetup</span>
                 </button>
             </div>
 
             <div id="address-fields" class="space-y-3 pt-2">
                 <div>
-                    <label class="text-[10px] text-gray-400 uppercase font-bold block mb-1">Adresse de livraison</label>
+                    <label class="text-[10px] text-gray-400 uppercase font-bold block mb-1" data-i18n="label_address">Adresse de livraison</label>
                     <input type="text" id="order-address" placeholder="Ex: 2 rue de la fontaine" class="w-full bg-gray-800 border border-gray-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-purple-500">
                 </div>
                 <div>
-                    <label class="text-[10px] text-gray-400 uppercase font-bold block mb-1">Code Postal</label>
+                    <label class="text-[10px] text-gray-400 uppercase font-bold block mb-1" data-i18n="label_zip">Code Postal</label>
                     <input type="text" id="order-zip" placeholder="Ex: 25340" class="w-full bg-gray-800 border border-gray-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-purple-500">
                 </div>
             </div>
 
             <!-- Compte Telegram détecté pour la prise de commande -->
             <div class="bg-purple-950/40 border border-purple-500/30 rounded-xl p-3">
-                <div class="text-[10px] text-purple-300 uppercase font-bold">Client Telegram (Prise de commande)</div>
+                <div class="text-[10px] text-purple-300 uppercase font-bold" data-i18n="telegram_client">Client Telegram (Prise de commande)</div>
                 <div class="text-sm font-bold text-white flex items-center gap-2 mt-1">
                     <span id="order-user-display">Chargement...</span>
-                    <span class="text-[10px] bg-purple-600/50 text-purple-200 px-2 py-0.5 rounded-full font-normal">Auto-détecté</span>
+                    <span class="text-[10px] bg-purple-600/50 text-purple-200 px-2 py-0.5 rounded-full font-normal" data-i18n="auto_detected">Auto-détecté</span>
                 </div>
             </div>
         </div>
@@ -140,29 +142,29 @@
         <!-- Section Total et Bouton -->
         <div id="cart-total-section" class="hidden mt-4">
             <div class="flex justify-between items-center bg-gray-900 p-4 rounded-xl border border-gray-800 mb-4">
-                <span class="text-gray-400">Frais de livraison :</span>
+                <span class="text-gray-400" data-i18n="delivery_fees">Frais de livraison :</span>
                 <span class="text-[#39ff14] font-bold">0 €</span>
             </div>
             <div class="flex justify-between items-center text-xl font-bold mb-6">
-                <span>TOTAL :</span>
+                <span data-i18n="total_label">TOTAL :</span>
                 <span id="cart-total-price" class="text-purple-400">0 €</span>
             </div>
             <button id="checkout-cart-tg" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3.5 rounded-xl transition-all shadow-[0_0_15px_rgba(147,51,234,0.3)]">
-                ✈️ Valider la commande
+                ✈️ <span data-i18n="validate_order">Valider la commande</span>
             </button>
         </div>
     </main>
 
     <!-- ONGLET 3 : HISTORIQUE (Derniers vus) -->
     <main id="tab-historique" class="tab-content p-4">
-        <h2 class="text-xl font-bold mb-4 text-purple-400">Derniers produits consultés</h2>
+        <h2 class="text-xl font-bold mb-4 text-purple-400" data-i18n="recent_viewed">Derniers produits consultés</h2>
         
         <div class="bg-gray-900 border border-gray-800 rounded-2xl p-3 flex gap-4 items-center">
             <img src="https://i.ibb.co/4gsK2nLB/photo-2026-09-22-09-21-31.jpg" class="w-16 h-16 rounded-xl object-cover border border-gray-700">
             <div>
                 <h3 class="font-bold text-lg">Dry-Shift 120U</h3>
-                <p class="text-xs text-gray-400 mt-1">Vu à l'instant</p>
-                <div class="text-purple-400 text-sm font-bold mt-1">À partir de 10 €</div>
+                <p class="text-xs text-gray-400 mt-1" data-i18n="just_now">Vu à l'instant</p>
+                <div class="text-purple-400 text-sm font-bold mt-1" data-i18n="from_price">À partir de 10 €</div>
             </div>
         </div>
     </main>
@@ -180,7 +182,7 @@
             <p id="tg-username" class="text-sm text-gray-400 mt-1">@korov420</p>
             <div class="mt-4 inline-flex items-center bg-[#15151a] rounded-xl px-4 py-1.5 border border-gray-800">
                 <span id="tg-id" class="text-xs font-mono text-gray-400">ID 8510763921</span> 
-                <span class="ml-3 pl-3 border-l border-gray-700 text-xs font-bold">FR</span>
+                <span class="ml-3 pl-3 border-l border-gray-700 text-xs font-bold" id="lang-indicator">FR</span>
             </div>
         </div>
 
@@ -189,7 +191,7 @@
                 <div class="text-blue-500 text-2xl">🛒</div>
                 <div>
                     <div class="text-2xl font-black" id="stat-panier">0</div>
-                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Panier</div>
+                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider" data-i18n="stat_cart">Panier</div>
                 </div>
             </div>
             <!-- Bouton cliquable pour voir les commandes des 24h -->
@@ -197,7 +199,7 @@
                 <div class="text-yellow-500 text-2xl">🕒</div>
                 <div>
                     <div class="text-2xl font-black" id="stat-commandes">0</div>
-                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Commandes (24h) ↗</div>
+                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider" data-i18n="stat_orders">Commandes (24h) ↗</div>
                 </div>
             </button>
             <!-- Bouton cliquable pour voir les favoris -->
@@ -205,14 +207,14 @@
                 <div class="text-pink-500 text-2xl">🤍</div>
                 <div>
                     <div class="text-2xl font-black" id="stat-favoris">0</div>
-                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Favoris ↗</div>
+                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider" data-i18n="stat_favorites">Favoris ↗</div>
                 </div>
             </button>
             <div class="bg-gray-900 p-4 rounded-2xl border border-gray-800 flex items-center gap-4">
                 <div class="text-green-500 text-2xl">📦</div>
                 <div>
                     <div class="text-2xl font-black">1</div>
-                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Produits</div>
+                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider" data-i18n="stat_products">Produits</div>
                 </div>
             </div>
         </div>
@@ -225,7 +227,7 @@
                 </div>
             </div>
         </div>
-        <button class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3.5 rounded-xl mb-8 shadow-[0_0_15px_rgba(147,51,234,0.3)] transition-all">
+        <button class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3.5 rounded-xl mb-8 shadow-[0_0_15px_rgba(147,51,234,0.3)] transition-all" data-i18n="share_qr">
             📥 Partager le QR code
         </button>
     </main>
@@ -234,7 +236,7 @@
     <div id="favorites-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-gray-900 border border-gray-800 rounded-3xl w-full max-w-md p-5 relative max-h-[80vh] flex flex-col">
             <div class="flex justify-between items-center mb-4 border-b border-gray-800 pb-3">
-                <h3 class="font-bold text-lg text-purple-400">🤍 Tes Produits Favoris</h3>
+                <h3 class="font-bold text-lg text-purple-400" data-i18n="fav_modal_title">🤍 Tes Produits Favoris</h3>
                 <button id="close-favorites-modal" class="text-gray-400 hover:text-white text-xl font-bold px-2">✕</button>
             </div>
             <div id="favorites-list-container" class="space-y-3 overflow-y-auto flex-1">
@@ -247,10 +249,10 @@
     <div id="orders-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-gray-900 border border-gray-800 rounded-3xl w-full max-w-md p-5 relative max-h-[80vh] flex flex-col">
             <div class="flex justify-between items-center mb-2 border-b border-gray-800 pb-3">
-                <h3 class="font-bold text-lg text-yellow-400">🕒 Commandes (24h)</h3>
+                <h3 class="font-bold text-lg text-yellow-400" data-i18n="orders_modal_title">🕒 Commandes (24h)</h3>
                 <button id="close-orders-modal" class="text-gray-400 hover:text-white text-xl font-bold px-2">✕</button>
             </div>
-            <p class="text-xs text-gray-400 mb-4">Ces commandes se réinitialisent automatiquement toutes les 24 heures.</p>
+            <p class="text-xs text-gray-400 mb-4" data-i18n="orders_modal_desc">Ces commandes se réinitialisent automatiquement toutes les 24 heures.</p>
             <div id="orders-list-container" class="space-y-3 overflow-y-auto flex-1">
                 <!-- Rempli dynamiquement -->
             </div>
@@ -260,20 +262,20 @@
     <!-- BARRE DE NAVIGATION -->
     <nav class="bottom-nav fixed bottom-0 left-0 w-full border-t border-gray-800 flex justify-around items-center px-2 py-2 text-[10px] text-gray-500 z-50">
         <button class="nav-btn flex flex-col items-center p-2 transition hover:text-white text-purple-400" data-target="tab-catalogue">
-            <span class="text-xl mb-1">🗂</span> Menu
+            <span class="text-xl mb-1">🗂</span> <span data-i18n="nav_menu">Menu</span>
         </button>
         <button class="nav-btn flex flex-col items-center p-2 transition hover:text-white relative" data-target="tab-panier">
-            <span class="text-xl mb-1">🛒</span> Panier
+            <span class="text-xl mb-1">🛒</span> <span data-i18n="nav_cart">Panier</span>
             <span id="cart-badge" class="absolute top-1 right-2 bg-purple-600 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
         </button>
         <button class="nav-btn flex flex-col items-center p-2 transition hover:text-white" data-target="tab-historique">
-            <span class="text-xl mb-1">🕒</span> Historique
+            <span class="text-xl mb-1">🕒</span> <span data-i18n="nav_history">Historique</span>
         </button>
         <button class="nav-btn flex flex-col items-center p-2 transition hover:text-white" data-target="tab-profil">
             <div class="w-6 h-6 rounded-full border border-gray-500 overflow-hidden mb-1 nav-avatar-border">
                 <img id="nav-avatar" src="https://i.ibb.co/4gsK2nLB/photo-2026-09-22-09-21-31.jpg" class="w-full h-full object-cover">
             </div>
-            Profil
+            <span data-i18n="nav_profile">Profil</span>
         </button>
     </nav>
 
@@ -281,6 +283,134 @@
     <script>
         const tg = window.Telegram.WebApp;
         tg.expand();
+
+        // --- DICTIONNAIRE DE TRADUCTION FR / EN ---
+        const translations = {
+            fr: {
+                header_sub: "1 produit · 1 catégorie",
+                banner: "🚚 Livraison : Mardi, Vendredi et Dimanche (12h - 00h)",
+                prod_desc: "Qualité premium, filtré à 120 microns. Texture sableuse, odeur très prononcée. Frais de livraison offerts (0€).",
+                add_to_cart: "Ajouter au panier",
+                order_direct: "Commander directement",
+                cart_title: "🛒 Ton Panier",
+                cart_empty: "Ton panier est vide.",
+                mode_reception: "📍 MODE DE RÉCEPTION",
+                mode_delivery: "Livraison",
+                mode_meetup: "Meetup",
+                label_address: "Adresse de livraison",
+                label_zip: "Code Postal",
+                telegram_client: "Client Telegram (Prise de commande)",
+                auto_detected: "Auto-détecté",
+                delivery_fees: "Frais de livraison :",
+                total_label: "TOTAL :",
+                validate_order: "Valider la commande",
+                recent_viewed: "Derniers produits consultés",
+                just_now: "Vu à l'instant",
+                from_price: "À partir de 10 €",
+                stat_cart: "Panier",
+                stat_orders: "Commandes (24h) ↗",
+                stat_favorites: "Favoris ↗",
+                stat_products: "Produits",
+                share_qr: "📥 Partager le QR code",
+                fav_modal_title: "🤍 Tes Produits Favoris",
+                orders_modal_title: "🕒 Commandes (24h)",
+                orders_modal_desc: "Ces commandes se réinitialisent automatiquement toutes les 24 heures.",
+                nav_menu: "Menu",
+                nav_cart: "Panier",
+                nav_history: "Historique",
+                nav_profile: "Profil",
+                msg_added_fav: "❤️ Ajouté aux favoris !",
+                msg_removed_fav: "🤍 Retiré des favoris.",
+                msg_no_fav: "🤍 Tu n'as aucun produit en favoris pour l'instant.",
+                msg_select_qty: "⚠️ Choisis d'abord une quantité (ex: 4.5g).",
+                msg_added_cart: "✅ Ajouté au panier !\n\n1x Dry-Shift 120U",
+                msg_order_success: "✅ Ta commande a été envoyée avec succès ! L'équipe va te contacter.",
+                msg_error: "❌ Erreur lors de l'envoi. Réessaie.",
+                msg_net_error: "❌ Erreur réseau.",
+                msg_no_addr: "⚠️ Indique ton adresse de livraison.",
+                no_orders_24h: "Aucune commande validée ces dernières 24h.",
+                btn_view: "Voir"
+            },
+            en: {
+                header_sub: "1 product · 1 category",
+                banner: "🚚 Delivery: Tuesday, Friday & Sunday (12pm - 12am)",
+                prod_desc: "Premium quality, filtered at 120 microns. Sandy texture, very pungent scent. Free delivery (0€).",
+                add_to_cart: "Add to cart",
+                order_direct: "Order directly",
+                cart_title: "🛒 Your Cart",
+                cart_empty: "Your cart is empty.",
+                mode_reception: "📍 RECEIVING METHOD",
+                mode_delivery: "Delivery",
+                mode_meetup: "Meetup",
+                label_address: "Delivery address",
+                label_zip: "Postal Code",
+                telegram_client: "Telegram Client (Order checkout)",
+                auto_detected: "Auto-detected",
+                delivery_fees: "Delivery fees:",
+                total_label: "TOTAL:",
+                validate_order: "Confirm order",
+                recent_viewed: "Recently viewed products",
+                just_now: "Just now",
+                from_price: "From 10 €",
+                stat_cart: "Cart",
+                stat_orders: "Orders (24h) ↗",
+                stat_favorites: "Favorites ↗",
+                stat_products: "Products",
+                share_qr: "📥 Share QR code",
+                fav_modal_title: "🤍 Your Favorite Products",
+                orders_modal_title: "🕒 Orders (24h)",
+                orders_modal_desc: "These orders automatically reset every 24 hours.",
+                nav_menu: "Menu",
+                nav_cart: "Cart",
+                nav_history: "History",
+                nav_profile: "Profile",
+                msg_added_fav: "❤️ Added to favorites!",
+                msg_removed_fav: "🤍 Removed from favorites.",
+                msg_no_fav: "🤍 You have no favorite products yet.",
+                msg_select_qty: "⚠️ Please choose a quantity first (e.g. 4.5g).",
+                msg_added_cart: "✅ Added to cart!\n\n1x Dry-Shift 120U",
+                msg_order_success: "✅ Your order has been successfully sent! The team will contact you.",
+                msg_error: "❌ Error while sending. Please try again.",
+                msg_net_error: "❌ Network error.",
+                msg_no_addr: "⚠️ Please enter your delivery address.",
+                no_orders_24h: "No orders confirmed in the last 24h.",
+                btn_view: "View"
+            }
+        };
+
+        // Langue par défaut (sauvegardée ou français)
+        let currentLang = localStorage.getItem('korov_lang') || 'fr';
+        const languageSelect = document.getElementById('language-select');
+        languageSelect.value = currentLang;
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('korov_lang', lang);
+            document.getElementById('lang-indicator').innerText = lang.toUpperCase();
+
+            // Traduction des attributs data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerText = translations[lang][key];
+                }
+            });
+
+            // Textes spécifiques hors attributs directs
+            document.getElementById('txt-header-sub').innerText = translations[lang].header_sub;
+            document.getElementById('txt-banner').innerText = translations[lang].banner;
+            document.getElementById('txt-prod-desc').innerText = translations[lang].prod_desc;
+
+            // Mise à jour de l'affichage dynamique si des éléments sont ouverts
+            updateCartUI();
+        }
+
+        languageSelect.addEventListener('change', (e) => {
+            setLanguage(e.target.value);
+        });
+
+        // Appliquer la langue au chargement
+        setLanguage(currentLang);
 
         // Identifiants Telegram
         const botToken = "8894404240:AAGG7XGKpUXblwLVU0SYnVhsQGlHoKJKZKc";
@@ -314,10 +444,9 @@
         function checkAndResetOrders() {
             const now = new Date().getTime();
             const savedTime = localStorage.getItem('korov_orders_time');
-            const twentyFourHours = 24 * 60 * 60 * 1000; // 24h en millisecondes
+            const twentyFourHours = 24 * 60 * 60 * 1000;
 
             if (!savedTime || (now - savedTime) > twentyFourHours) {
-                // Si plus de 24h ou première fois, on remet tout à 0 et on vide l'historique des commandes 24h
                 localStorage.setItem('korov_orders_count', '0');
                 localStorage.setItem('korov_orders_time', now.toString());
                 localStorage.setItem('korov_orders_history', JSON.stringify([]));
@@ -331,7 +460,6 @@
         }
         updateOrdersUI();
 
-        // Fonction pour enregistrer la commande dans l'historique et incrémenter le compteur
         function addOrderToHistory(orderDetails, totalAmount, mode) {
             checkAndResetOrders();
             
@@ -364,7 +492,7 @@
             const history = JSON.parse(localStorage.getItem('korov_orders_history')) || [];
             
             if (history.length === 0) {
-                ordersListContainer.innerHTML = `<div class="text-center text-gray-400 py-6 text-sm">Aucune commande validée ces dernières 24h.</div>`;
+                ordersListContainer.innerHTML = `<div class="text-center text-gray-400 py-6 text-sm">${translations[currentLang].no_orders_24h}</div>`;
             } else {
                 let html = "";
                 history.forEach((ord, index) => {
@@ -376,7 +504,7 @@
                         </div>
                         <div class="text-xs text-gray-300 whitespace-pre-line">${ord.details}</div>
                         <div class="flex justify-between items-center pt-1 font-bold text-sm">
-                            <span class="text-gray-400">Total :</span>
+                            <span class="text-gray-400">${translations[currentLang].total_label}</span>
                             <span class="text-purple-400">${ord.total} €</span>
                         </div>
                     </div>`;
@@ -390,7 +518,7 @@
             ordersModal.classList.add('hidden');
         });
 
-        // --- GESTION DES FAVORIS AVEC MÉMOIRE LOCALE (LocalStorage) ---
+        // --- GESTION DES FAVORIS AVEC MÉMOIRE LOCALE ---
         let favorites = JSON.parse(localStorage.getItem('korov_favorites')) || [];
         const favoriteBtn = document.getElementById('favorite-btn');
         const statFavoris = document.getElementById('stat-favoris');
@@ -407,11 +535,7 @@
 
         function updateFavoritesUI() {
             const isFav = favorites.some(p => p.name === productData.name);
-            if (isFav) {
-                favoriteBtn.innerText = "❤️";
-            } else {
-                favoriteBtn.innerText = "🤍";
-            }
+            favoriteBtn.innerText = isFav ? "❤️" : "🤍";
             statFavoris.innerText = favorites.length;
         }
         updateFavoritesUI();
@@ -421,11 +545,11 @@
             if (index === -1) {
                 favorites.push(productData);
                 favoriteBtn.innerText = "❤️";
-                tg.showAlert("❤️ Ajouté aux favoris !");
+                tg.showAlert(translations[currentLang].msg_added_fav);
             } else {
                 favorites.splice(index, 1);
                 favoriteBtn.innerText = "🤍";
-                tg.showAlert("🤍 Retiré des favoris.");
+                tg.showAlert(translations[currentLang].msg_removed_fav);
             }
             localStorage.setItem('korov_favorites', JSON.stringify(favorites));
             statFavoris.innerText = favorites.length;
@@ -433,7 +557,7 @@
 
         openFavoritesModalBtn.addEventListener('click', () => {
             if (favorites.length === 0) {
-                tg.showAlert("🤍 Tu n'as aucun produit en favoris pour l'instant.");
+                tg.showAlert(translations[currentLang].msg_no_fav);
                 return;
             }
             let html = "";
@@ -447,7 +571,7 @@
                             <p class="text-purple-400 text-xs font-bold mt-0.5">${item.price}</p>
                         </div>
                     </div>
-                    <button onclick="goToCatalogue()" class="bg-purple-600 text-white text-xs font-bold px-3 py-2 rounded-xl">Voir</button>
+                    <button onclick="goToCatalogue()" class="bg-purple-600 text-white text-xs font-bold px-3 py-2 rounded-xl">${translations[currentLang].btn_view}</button>
                 </div>`;
             });
             favoritesListContainer.innerHTML = html;
@@ -464,9 +588,8 @@
             document.getElementById('tab-catalogue').classList.add('active');
         }
 
-        // --- GESTION DU PANIER AVEC MÉMOIRE LOCALE ---
+        // --- GESTION DU PANIER ---
         let cart = JSON.parse(localStorage.getItem('korov_cart')) || [];
-
         let selectedMode = 'Livraison';
         const btnDelivery = document.getElementById('btn-delivery');
         const btnMeetup = document.getElementById('btn-meetup');
@@ -571,7 +694,7 @@
                 cartTotalSection.classList.add('hidden');
                 deliverySection.classList.add('hidden');
                 cartItemsDiv.classList.add('text-center', 'mt-10');
-                cartItemsDiv.innerHTML = "Ton panier est vide.";
+                cartItemsDiv.innerHTML = translations[currentLang].cart_empty;
             }
         }
 
@@ -584,12 +707,12 @@
 
         document.getElementById('add-to-cart').addEventListener('click', () => {
             if(!selectedGram) {
-                tg.showAlert("⚠️ Choisis d'abord une quantité (ex: 4.5g).");
+                tg.showAlert(translations[currentLang].msg_select_qty);
                 return;
             }
             cart.push({ name: "Dry-Shift 120U", gram: selectedGram, price: selectedPrice });
             updateCartUI();
-            tg.showAlert(`✅ Ajouté au panier !\n\n1x Dry-Shift 120U (${selectedGram})`);
+            tg.showAlert(`${translations[currentLang].msg_added_cart} (${selectedGram})`);
         });
 
         function sendOrderToTelegram(detailsSummary, detailsFullText, total) {
@@ -603,7 +726,7 @@
 
             const userInfoText = `👤 Client : ${userTelegramInfo.name}\n✈️ Telegram : ${userTelegramInfo.username}\n🆔 ID : ${userTelegramInfo.id}`;
 
-            const messageText = `🚨 NOUVELLE COMMANDE !\n\n${detailsFullText}\n💶 TOTAL : ${total} €\n\n${deliveryDetails}\n${userInfoText}\n\n🚚 Livraison : 0 € (OFFERT)\n📅 Créneaux dispo : Mardi, Vendredi ou Dimanche (12h-00h)\n\nVia Menu KOROV.420`;
+            const messageText = `🚨 NOUVELLE COMMANDE !\n\n${detailsFullText}\n💶 TOTAL : ${total} €\n\n${deliveryDetails}\n${userInfoText}\n\n🚚 Livraison : 0 € (OFFERT)\n📅 Créneaux dispo : Mardi, Vendredi ou Dimanche (12h-00h)\n\nVia Menu KOROV.420 [Lang: ${currentLang.toUpperCase()}]`;
 
             fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: 'POST',
@@ -611,25 +734,22 @@
                 body: JSON.stringify({ chat_id: chatId, text: messageText })
             }).then(response => {
                 if(response.ok) {
-                    // On enregistre dans l'historique 24h du profil
                     addOrderToHistory(detailsSummary, total, selectedMode);
-                    
-                    // Vider le panier
                     cart = [];
                     updateCartUI();
-                    tg.showAlert("✅ Ta commande a été envoyée avec succès ! L'équipe va te contacter.");
+                    tg.showAlert(translations[currentLang].msg_order_success);
                     setTimeout(() => { tg.close(); }, 2500);
                 } else { 
-                    tg.showAlert("❌ Erreur lors de l'envoi. Réessaie."); 
+                    tg.showAlert(translations[currentLang].msg_error); 
                 }
             }).catch(err => { 
-                tg.showAlert("❌ Erreur réseau."); 
+                tg.showAlert(translations[currentLang].msg_net_error); 
             });
         }
 
         document.getElementById('checkout-tg').addEventListener('click', () => {
             if(!selectedGram) {
-                tg.showAlert("⚠️ Choisis une quantité avant de commander.");
+                tg.showAlert(translations[currentLang].msg_select_qty);
                 return;
             }
             let detailsSummary = `📦 Dry-Shift 120U (${selectedGram})`;
@@ -643,7 +763,7 @@
             if (selectedMode === 'Livraison') {
                 const addr = document.getElementById('order-address').value.trim();
                 if(!addr) {
-                    tg.showAlert("⚠️ Indique ton adresse de livraison.");
+                    tg.showAlert(translations[currentLang].msg_no_addr);
                     return;
                 }
             }
