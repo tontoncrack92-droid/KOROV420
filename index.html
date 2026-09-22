@@ -298,7 +298,7 @@
         // Mettre à jour le texte du client dans l'onglet panier
         document.getElementById('order-user-display').innerText = `${userTelegramInfo.name} (${userTelegramInfo.username})`;
 
-        // Gestion de l'interrupteur de notifications
+        // Gestion de l'interrupteur de notifications (vrai bot krv420_bot)
         const notifToggle = document.getElementById('notif-toggle');
 
         notifToggle.addEventListener('change', (e) => {
@@ -335,7 +335,7 @@
             addressFields.classList.add('hidden');
         });
 
-        // QR Code
+        // QR Code (vrai bot krv420_bot)
         new QRCode(document.getElementById("qrcode"), {
             text: "https://t.me/krv420_bot",
             width: 160, height: 160,
