@@ -34,7 +34,7 @@
                 <div class="absolute bottom-0 right-0 w-3 h-3 bg-[#39ff14] rounded-full border-2 border-[#0b0b0e]"></div>
             </div>
             <div>
-                <h1 class="font-bold text-lg leading-tight tracking-wide">DOC RICHTO</h1>
+                <h1 class="font-bold text-lg leading-tight tracking-wide">KOROV.420</h1>
                 <p class="text-xs text-gray-400">1 produit · 1 catégorie</p>
             </div>
         </div>
@@ -310,7 +310,6 @@
             image: "https://i.ibb.co/4gsK2nLB/photo-2026-09-22-09-21-31.jpg"
         };
 
-        // Fonction pour mettre à jour l'affichage du bouton cœur et du compteur au démarrage
         function updateFavoritesUI() {
             const isFav = favorites.some(p => p.name === productData.name);
             if (isFav) {
@@ -333,7 +332,6 @@
                 favoriteBtn.innerText = "🤍";
                 tg.showAlert("🤍 Retiré des favoris.");
             }
-            // Sauvegarde dans la mémoire du téléphone
             localStorage.setItem('korov_favorites', JSON.stringify(favorites));
             statFavoris.innerText = favorites.length;
         });
@@ -374,7 +372,6 @@
         // --- GESTION DU PANIER AVEC MÉMOIRE LOCALE ---
         let cart = JSON.parse(localStorage.getItem('korov_cart')) || [];
 
-        // Gestion du Mode Livraison / Meetup
         let selectedMode = 'Livraison';
         const btnDelivery = document.getElementById('btn-delivery');
         const btnMeetup = document.getElementById('btn-meetup');
@@ -393,7 +390,6 @@
             document.getElementById('address-fields').classList.add('hidden');
         });
 
-        // QR Code
         new QRCode(document.getElementById("qrcode"), {
             text: "https://t.me/krv420_bot",
             width: 160, height: 160,
@@ -401,7 +397,6 @@
             correctLevel : QRCode.CorrectLevel.H
         });
 
-        // Navigation dynamique entre onglets
         document.querySelectorAll('.nav-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const targetId = e.currentTarget.getAttribute('data-target');
@@ -418,7 +413,6 @@
             });
         });
 
-        // Logique du Catalogue (Sélection de grammage)
         let selectedGram = null;
         let selectedPrice = 0;
 
@@ -437,7 +431,6 @@
             });
         });
 
-        // Fonction pour mettre à jour l'affichage du Panier
         function updateCartUI() {
             const cartBadge = document.getElementById('cart-badge');
             const statPanier = document.getElementById('stat-panier');
@@ -446,7 +439,6 @@
             const deliverySection = document.getElementById('delivery-section');
             const cartTotalPrice = document.getElementById('cart-total-price');
 
-            // Sauvegarde dans la mémoire locale
             localStorage.setItem('korov_cart', JSON.stringify(cart));
 
             if(cart.length > 0) {
@@ -488,7 +480,6 @@
             }
         }
 
-        // Lancer la mise à jour du panier au chargement de la page
         updateCartUI();
 
         function removeFromCart(index) {
@@ -496,7 +487,6 @@
             updateCartUI();
         }
 
-        // Ajouter au panier
         document.getElementById('add-to-cart').addEventListener('click', () => {
             if(!selectedGram) {
                 tg.showAlert("⚠️ Choisis d'abord une quantité (ex: 4.5g).");
@@ -507,7 +497,6 @@
             tg.showAlert(`✅ Ajouté au panier !\n\n1x Dry-Shift 120U (${selectedGram})`);
         });
 
-        // Envoi au bot Telegram
         function sendOrderToTelegram(details, total) {
             const address = document.getElementById('order-address').value || 'Non renseignée';
             const zip = document.getElementById('order-zip').value || 'Non renseigné';
@@ -527,7 +516,6 @@
                 body: JSON.stringify({ chat_id: chatId, text: messageText })
             }).then(response => {
                 if(response.ok) {
-                    // Vider le panier après commande réussie
                     cart = [];
                     updateCartUI();
                     tg.showAlert("✅ Ta commande a été envoyée avec succès ! L'équipe va te contacter.");
@@ -540,7 +528,6 @@
             });
         }
 
-        // Commander directement (1 item)
         document.getElementById('checkout-tg').addEventListener('click', () => {
             if(!selectedGram) {
                 tg.showAlert("⚠️ Choisis une quantité avant de commander.");
@@ -550,7 +537,6 @@
             sendOrderToTelegram(details, selectedPrice);
         });
 
-        // Commander depuis le panier
         document.getElementById('checkout-cart-tg').addEventListener('click', () => {
             if(cart.length === 0) return;
             
