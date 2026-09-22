@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>KOROV.420 Menu</title>
-    <!-- Tailwind CSS pour le design -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Script Officiel Telegram Mini App -->
+    <!-- Telegram Mini App -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <!-- Librairie pour générer le QR Code -->
+    <!-- QR Code -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         body { 
@@ -17,8 +17,8 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
             -webkit-tap-highlight-color: transparent;
         }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        .tab-content { display: none !important; }
+        .tab-content.active { display: block !important; }
         .neon-border { box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); border: 1px solid #a855f7; }
         .bottom-nav { background: rgba(11, 11, 14, 0.95); backdrop-filter: blur(10px); }
         ::-webkit-scrollbar { width: 0px; background: transparent; }
@@ -26,7 +26,7 @@
 </head>
 <body class="pb-24">
 
-    <!-- HEADER: Logo et Infos -->
+    <!-- HEADER -->
     <header class="flex justify-between items-center p-4 border-b border-gray-800">
         <div class="flex items-center gap-3">
             <div class="w-11 h-11 rounded-full border-2 border-purple-500 overflow-hidden relative">
@@ -38,26 +38,24 @@
                 <p id="txt-header-sub" class="text-xs text-gray-400">1 produit · 1 catégorie</p>
             </div>
         </div>
-        <!-- Sélecteur de langue cliquable -->
         <select id="language-select" class="bg-gray-800 text-white px-3 py-1.5 rounded-lg text-sm border border-gray-700 outline-none cursor-pointer">
             <option value="fr">🇫🇷 FR</option>
             <option value="en">🇬🇧 EN</option>
         </select>
     </header>
 
-    <!-- BANNIÈRE DE LIVRAISON -->
+    <!-- BANNIÈRE -->
     <div id="txt-banner" class="bg-purple-900/30 border-y border-purple-500/30 p-2 text-center text-xs text-purple-300 font-medium">
         🚚 Livraison : Mardi, Vendredi et Dimanche (12h - 00h)
     </div>
 
-    <!-- ONGLET 1 : LE CATALOGUE -->
+    <!-- ONGLET 1 : CATALOGUE -->
     <main id="tab-catalogue" class="tab-content active p-4">
         <div class="rounded-2xl overflow-hidden mb-4 relative aspect-square neon-border">
             <img src="https://i.ibb.co/4gsK2nLB/photo-2026-09-22-09-21-31.jpg" alt="Dry-Shift 120U" class="w-full h-full object-cover">
             <div class="absolute top-3 left-3 bg-black/70 px-3 py-1 rounded-full text-xs font-bold backdrop-blur-md border border-gray-700">
                 DRY SIFT 🍇
             </div>
-            <!-- Bouton Favori cliquable -->
             <button id="favorite-btn" class="absolute top-3 right-3 bg-black/70 p-2.5 rounded-full text-white backdrop-blur-md border border-gray-700 transition-all hover:scale-110">
                 🤍
             </button>
@@ -67,19 +65,19 @@
         <p id="txt-prod-desc" class="text-sm text-gray-400 mb-5 leading-relaxed">Qualité premium, filtré à 120 microns. Texture sableuse, odeur très prononcée. Frais de livraison offerts (0€).</p>
         
         <div class="grid grid-cols-2 gap-3 mb-6">
-            <button class="variant-btn border border-gray-700 rounded-xl p-3 text-center transition-all bg-gray-900 focus:border-purple-500 focus:bg-purple-900/20" data-gram="0.9g" data-price="10">
+            <button class="variant-btn border border-gray-700 rounded-xl p-3 text-center transition-all bg-gray-900" data-gram="0.9g" data-price="10">
                 <div class="font-bold text-xl">0.9g</div><div class="text-gray-400 text-sm">10 €</div>
             </button>
-            <button class="variant-btn border border-gray-700 rounded-xl p-3 text-center transition-all bg-gray-900 focus:border-purple-500 focus:bg-purple-900/20" data-gram="1.8g" data-price="20">
+            <button class="variant-btn border border-gray-700 rounded-xl p-3 text-center transition-all bg-gray-900" data-gram="1.8g" data-price="20">
                 <div class="font-bold text-xl">1.8g</div><div class="text-gray-400 text-sm">20 €</div>
             </button>
-            <button class="variant-btn border border-gray-700 rounded-xl p-3 text-center transition-all bg-gray-900 focus:border-purple-500 focus:bg-purple-900/20" data-gram="4.5g" data-price="50">
+            <button class="variant-btn border border-gray-700 rounded-xl p-3 text-center transition-all bg-gray-900" data-gram="4.5g" data-price="50">
                 <div class="font-bold text-xl">4.5g</div><div class="text-gray-400 text-sm">50 €</div>
             </button>
-            <button class="variant-btn border border-gray-700 rounded-xl p-3 text-center transition-all bg-gray-900 focus:border-purple-500 focus:bg-purple-900/20" data-gram="10g" data-price="110">
+            <button class="variant-btn border border-gray-700 rounded-xl p-3 text-center transition-all bg-gray-900" data-gram="10g" data-price="110">
                 <div class="font-bold text-xl">10g</div><div class="text-gray-400 text-sm">110 €</div>
             </button>
-            <button class="variant-btn border border-gray-700 rounded-xl p-3 text-center col-span-2 transition-all bg-gray-900 focus:border-purple-500 focus:bg-purple-900/20" data-gram="25g" data-price="230">
+            <button class="variant-btn border border-gray-700 rounded-xl p-3 text-center col-span-2 transition-all bg-gray-900" data-gram="25g" data-price="230">
                 <div class="font-bold text-xl">25g</div><div class="text-gray-400 text-sm">230 €</div>
             </button>
         </div>
@@ -94,18 +92,16 @@
         </div>
     </main>
 
-    <!-- ONGLET 2 : LE PANIER -->
+    <!-- ONGLET 2 : PANIER -->
     <main id="tab-panier" class="tab-content p-4">
         <h2 class="text-2xl font-bold mb-4" data-i18n="cart_title">🛒 Ton Panier</h2>
         
-        <!-- Liste des articles -->
         <div id="cart-items" class="space-y-3 mb-6 text-gray-400 text-center mt-10" data-i18n="cart_empty">
             Ton panier est vide.
         </div>
 
-        <!-- Formulaire Informations de Livraison & Télégramme -->
         <div id="delivery-section" class="hidden bg-gray-900 border border-gray-800 rounded-2xl p-4 mb-6 space-y-4">
-            <div class="text-sm font-bold text-purple-400 mb-2 border-b border-gray-800 pb-2 flex justify-between items-center">
+            <div class="text-sm font-bold text-purple-400 mb-2 border-b border-gray-800 pb-2">
                 <span data-i18n="mode_reception">📍 MODE DE RÉCEPTION</span>
             </div>
             
@@ -129,17 +125,14 @@
                 </div>
             </div>
 
-            <!-- Compte Telegram détecté pour la prise de commande -->
             <div class="bg-purple-950/40 border border-purple-500/30 rounded-xl p-3">
                 <div class="text-[10px] text-purple-300 uppercase font-bold" data-i18n="telegram_client">Client Telegram (Prise de commande)</div>
                 <div class="text-sm font-bold text-white flex items-center gap-2 mt-1">
                     <span id="order-user-display">Chargement...</span>
-                    <span class="text-[10px] bg-purple-600/50 text-purple-200 px-2 py-0.5 rounded-full font-normal" data-i18n="auto_detected">Auto-détecté</span>
                 </div>
             </div>
         </div>
 
-        <!-- Section Total et Bouton -->
         <div id="cart-total-section" class="hidden mt-4">
             <div class="flex justify-between items-center bg-gray-900 p-4 rounded-xl border border-gray-800 mb-4">
                 <span class="text-gray-400" data-i18n="delivery_fees">Frais de livraison :</span>
@@ -155,10 +148,9 @@
         </div>
     </main>
 
-    <!-- ONGLET 3 : HISTORIQUE (Derniers vus) -->
+    <!-- ONGLET 3 : HISTORIQUE -->
     <main id="tab-historique" class="tab-content p-4">
         <h2 class="text-xl font-bold mb-4 text-purple-400" data-i18n="recent_viewed">Derniers produits consultés</h2>
-        
         <div class="bg-gray-900 border border-gray-800 rounded-2xl p-3 flex gap-4 items-center">
             <img src="https://i.ibb.co/4gsK2nLB/photo-2026-09-22-09-21-31.jpg" class="w-16 h-16 rounded-xl object-cover border border-gray-700">
             <div>
@@ -169,7 +161,7 @@
         </div>
     </main>
 
-    <!-- ONGLET 4 : LE PROFIL -->
+    <!-- ONGLET 4 : PROFIL -->
     <main id="tab-profil" class="tab-content p-4">
         <div class="bg-gray-900 rounded-3xl p-6 text-center border border-gray-800 relative mt-8 mb-6">
             <div class="absolute -top-10 left-1/2 transform -translate-x-1/2">
@@ -194,16 +186,14 @@
                     <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider" data-i18n="stat_cart">Panier</div>
                 </div>
             </div>
-            <!-- Bouton cliquable pour voir les commandes des 24h -->
-            <button id="open-orders-modal" class="bg-gray-900 p-4 rounded-2xl border border-gray-800 flex items-center gap-4 text-left hover:border-purple-500/50 transition-all w-full">
+            <button id="open-orders-modal" class="bg-gray-900 p-4 rounded-2xl border border-gray-800 flex items-center gap-4 text-left w-full">
                 <div class="text-yellow-500 text-2xl">🕒</div>
                 <div>
                     <div class="text-2xl font-black" id="stat-commandes">0</div>
                     <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider" data-i18n="stat_orders">Commandes (24h) ↗</div>
                 </div>
             </button>
-            <!-- Bouton cliquable pour voir les favoris -->
-            <button id="open-favorites-modal" class="bg-gray-900 p-4 rounded-2xl border border-gray-800 flex items-center gap-4 text-left hover:border-purple-500/50 transition-all w-full">
+            <button id="open-favorites-modal" class="bg-gray-900 p-4 rounded-2xl border border-gray-800 flex items-center gap-4 text-left w-full">
                 <div class="text-pink-500 text-2xl">🤍</div>
                 <div>
                     <div class="text-2xl font-black" id="stat-favoris">0</div>
@@ -232,20 +222,18 @@
         </button>
     </main>
 
-    <!-- MODAL / SECTION DES FAVORIS -->
+    <!-- MODAL FAVORIS -->
     <div id="favorites-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-gray-900 border border-gray-800 rounded-3xl w-full max-w-md p-5 relative max-h-[80vh] flex flex-col">
             <div class="flex justify-between items-center mb-4 border-b border-gray-800 pb-3">
                 <h3 class="font-bold text-lg text-purple-400" data-i18n="fav_modal_title">🤍 Tes Produits Favoris</h3>
                 <button id="close-favorites-modal" class="text-gray-400 hover:text-white text-xl font-bold px-2">✕</button>
             </div>
-            <div id="favorites-list-container" class="space-y-3 overflow-y-auto flex-1">
-                <!-- Rempli dynamiquement -->
-            </div>
+            <div id="favorites-list-container" class="space-y-3 overflow-y-auto flex-1"></div>
         </div>
     </div>
 
-    <!-- MODAL / SECTION DE L'HISTORIQUE DES COMMANDES (24H) -->
+    <!-- MODAL COMMANDES -->
     <div id="orders-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-gray-900 border border-gray-800 rounded-3xl w-full max-w-md p-5 relative max-h-[80vh] flex flex-col">
             <div class="flex justify-between items-center mb-2 border-b border-gray-800 pb-3">
@@ -253,25 +241,23 @@
                 <button id="close-orders-modal" class="text-gray-400 hover:text-white text-xl font-bold px-2">✕</button>
             </div>
             <p class="text-xs text-gray-400 mb-4" data-i18n="orders_modal_desc">Ces commandes se réinitialisent automatiquement toutes les 24 heures.</p>
-            <div id="orders-list-container" class="space-y-3 overflow-y-auto flex-1">
-                <!-- Rempli dynamiquement -->
-            </div>
+            <div id="orders-list-container" class="space-y-3 overflow-y-auto flex-1"></div>
         </div>
     </div>
 
     <!-- BARRE DE NAVIGATION -->
     <nav class="bottom-nav fixed bottom-0 left-0 w-full border-t border-gray-800 flex justify-around items-center px-2 py-2 text-[10px] text-gray-500 z-50">
-        <button class="nav-btn flex flex-col items-center p-2 transition hover:text-white text-purple-400" data-target="tab-catalogue">
+        <button class="nav-btn flex flex-col items-center p-2 text-purple-400" data-target="tab-catalogue">
             <span class="text-xl mb-1">🗂</span> <span data-i18n="nav_menu">Menu</span>
         </button>
-        <button class="nav-btn flex flex-col items-center p-2 transition hover:text-white relative" data-target="tab-panier">
+        <button class="nav-btn flex flex-col items-center p-2 relative" data-target="tab-panier">
             <span class="text-xl mb-1">🛒</span> <span data-i18n="nav_cart">Panier</span>
             <span id="cart-badge" class="absolute top-1 right-2 bg-purple-600 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
         </button>
-        <button class="nav-btn flex flex-col items-center p-2 transition hover:text-white" data-target="tab-historique">
+        <button class="nav-btn flex flex-col items-center p-2" data-target="tab-historique">
             <span class="text-xl mb-1">🕒</span> <span data-i18n="nav_history">Historique</span>
         </button>
-        <button class="nav-btn flex flex-col items-center p-2 transition hover:text-white" data-target="tab-profil">
+        <button class="nav-btn flex flex-col items-center p-2" data-target="tab-profil">
             <div class="w-6 h-6 rounded-full border border-gray-500 overflow-hidden mb-1 nav-avatar-border">
                 <img id="nav-avatar" src="https://i.ibb.co/4gsK2nLB/photo-2026-09-22-09-21-31.jpg" class="w-full h-full object-cover">
             </div>
@@ -284,7 +270,6 @@
         const tg = window.Telegram.WebApp;
         tg.expand();
 
-        // --- DICTIONNAIRE DE TRADUCTION FR / EN ---
         const translations = {
             fr: {
                 header_sub: "1 produit · 1 catégorie",
@@ -300,7 +285,6 @@
                 label_address: "Adresse de livraison",
                 label_zip: "Code Postal",
                 telegram_client: "Client Telegram (Prise de commande)",
-                auto_detected: "Auto-détecté",
                 delivery_fees: "Frais de livraison :",
                 total_label: "TOTAL :",
                 validate_order: "Valider la commande",
@@ -345,7 +329,6 @@
                 label_address: "Delivery address",
                 label_zip: "Postal Code",
                 telegram_client: "Telegram Client (Order checkout)",
-                auto_detected: "Auto-detected",
                 delivery_fees: "Delivery fees:",
                 total_label: "TOTAL:",
                 validate_order: "Confirm order",
@@ -378,7 +361,6 @@
             }
         };
 
-        // Langue par défaut (sauvegardée ou français)
         let currentLang = localStorage.getItem('korov_lang') || 'fr';
         const languageSelect = document.getElementById('language-select');
         languageSelect.value = currentLang;
@@ -388,7 +370,6 @@
             localStorage.setItem('korov_lang', lang);
             document.getElementById('lang-indicator').innerText = lang.toUpperCase();
 
-            // Traduction des attributs data-i18n
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (translations[lang][key]) {
@@ -396,31 +377,41 @@
                 }
             });
 
-            // Textes spécifiques hors attributs directs
             document.getElementById('txt-header-sub').innerText = translations[lang].header_sub;
             document.getElementById('txt-banner').innerText = translations[lang].banner;
             document.getElementById('txt-prod-desc').innerText = translations[lang].prod_desc;
-
-            // Mise à jour de l'affichage dynamique si des éléments sont ouverts
             updateCartUI();
         }
 
-        languageSelect.addEventListener('change', (e) => {
-            setLanguage(e.target.value);
-        });
-
-        // Appliquer la langue au chargement
+        languageSelect.addEventListener('change', (e) => setLanguage(e.target.value));
         setLanguage(currentLang);
 
-        // Identifiants Telegram
+        // SYSTÈME DE NAVIGATION CORRIGÉ ET SIMPLIFIÉ
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const targetId = e.currentTarget.getAttribute('data-target');
+                
+                // Masquer tous les onglets
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                
+                // Afficher l'onglet sélectionné
+                const targetTab = document.getElementById(targetId);
+                if(targetTab) {
+                    targetTab.classList.add('active');
+                }
+                
+                // Mettre à jour les couleurs des boutons de la barre
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('text-purple-400'));
+                e.currentTarget.classList.add('text-purple-400');
+            });
+        });
+
+        // Infos Telegram
         const botToken = "8894404240:AAGG7XGKpUXblwLVU0SYnVhsQGlHoKJKZKc";
         const chatId = "8510763921";
-
-        let userTelegramInfo = {
-            name: "Client Inconnu",
-            username: "Pas d'username",
-            id: "N/A"
-        };
+        let userTelegramInfo = { name: "Client Inconnu", username: "Pas d'username", id: "N/A" };
 
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
             const user = tg.initDataUnsafe.user;
@@ -437,67 +428,33 @@
                 document.getElementById('nav-avatar').src = user.photo_url;
             }
         }
-
         document.getElementById('order-user-display').innerText = `${userTelegramInfo.name} (${userTelegramInfo.username})`;
 
-        // --- GESTION DES COMMANDES (RESET AUTOMATIQUE TOUTES LES 24H + HISTORIQUE) ---
+        // Gestion 24h & Commandes
         function checkAndResetOrders() {
             const now = new Date().getTime();
             const savedTime = localStorage.getItem('korov_orders_time');
-            const twentyFourHours = 24 * 60 * 60 * 1000;
-
-            if (!savedTime || (now - savedTime) > twentyFourHours) {
+            if (!savedTime || (now - savedTime) > 86400000) {
                 localStorage.setItem('korov_orders_count', '0');
                 localStorage.setItem('korov_orders_time', now.toString());
                 localStorage.setItem('korov_orders_history', JSON.stringify([]));
             }
         }
         checkAndResetOrders();
+        document.getElementById('stat-commandes').innerText = localStorage.getItem('korov_orders_count') || '0';
 
-        function updateOrdersUI() {
-            const count = localStorage.getItem('korov_orders_count') || '0';
-            document.getElementById('stat-commandes').innerText = count;
-        }
-        updateOrdersUI();
-
-        function addOrderToHistory(orderDetails, totalAmount, mode) {
-            checkAndResetOrders();
-            
-            let currentCount = parseInt(localStorage.getItem('korov_orders_count') || '0');
-            currentCount += 1;
-            localStorage.setItem('korov_orders_count', currentCount.toString());
-
-            let history = JSON.parse(localStorage.getItem('korov_orders_history')) || [];
-            const nowTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            
-            history.unshift({
-                time: nowTime,
-                details: orderDetails,
-                total: totalAmount,
-                mode: mode
-            });
-
-            localStorage.setItem('korov_orders_history', JSON.stringify(history));
-            updateOrdersUI();
-        }
-
-        // --- GESTION DE LA MODALE DES COMMANDES ---
+        // Modale Commandes
         const ordersModal = document.getElementById('orders-modal');
-        const openOrdersModalBtn = document.getElementById('open-orders-modal');
-        const closeOrdersModalBtn = document.getElementById('close-orders-modal');
-        const ordersListContainer = document.getElementById('orders-list-container');
-
-        openOrdersModalBtn.addEventListener('click', () => {
+        document.getElementById('open-orders-modal').addEventListener('click', () => {
             checkAndResetOrders();
             const history = JSON.parse(localStorage.getItem('korov_orders_history')) || [];
-            
+            const container = document.getElementById('orders-list-container');
             if (history.length === 0) {
-                ordersListContainer.innerHTML = `<div class="text-center text-gray-400 py-6 text-sm">${translations[currentLang].no_orders_24h}</div>`;
+                container.innerHTML = `<div class="text-center text-gray-400 py-6 text-sm">${translations[currentLang].no_orders_24h}</div>`;
             } else {
                 let html = "";
                 history.forEach((ord, index) => {
-                    html += `
-                    <div class="bg-gray-800 border border-gray-700 rounded-2xl p-4 space-y-2">
+                    html += `<div class="bg-gray-800 border border-gray-700 rounded-2xl p-4 space-y-2">
                         <div class="flex justify-between items-center border-b border-gray-700 pb-2">
                             <span class="text-xs font-bold text-yellow-400">Commande #${history.length - index}</span>
                             <span class="text-[10px] text-gray-400">${ord.time} (${ord.mode})</span>
@@ -509,34 +466,21 @@
                         </div>
                     </div>`;
                 });
-                ordersListContainer.innerHTML = html;
+                container.innerHTML = html;
             }
             ordersModal.classList.remove('hidden');
         });
+        document.getElementById('close-orders-modal').addEventListener('click', () => ordersModal.classList.add('hidden'));
 
-        closeOrdersModalBtn.addEventListener('click', () => {
-            ordersModal.classList.add('hidden');
-        });
-
-        // --- GESTION DES FAVORIS AVEC MÉMOIRE LOCALE ---
+        // Favoris
         let favorites = JSON.parse(localStorage.getItem('korov_favorites')) || [];
         const favoriteBtn = document.getElementById('favorite-btn');
-        const statFavoris = document.getElementById('stat-favoris');
-        const favoritesModal = document.getElementById('favorites-modal');
-        const openFavoritesModalBtn = document.getElementById('open-favorites-modal');
-        const closeFavoritesModalBtn = document.getElementById('close-favorites-modal');
-        const favoritesListContainer = document.getElementById('favorites-list-container');
-
-        const productData = {
-            name: "Dry-Shift 120U",
-            price: "À partir de 10 €",
-            image: "https://i.ibb.co/4gsK2nLB/photo-2026-09-22-09-21-31.jpg"
-        };
+        const productData = { name: "Dry-Shift 120U", price: "À partir de 10 €", image: "https://i.ibb.co/4gsK2nLB/photo-2026-09-22-09-21-31.jpg" };
 
         function updateFavoritesUI() {
             const isFav = favorites.some(p => p.name === productData.name);
             favoriteBtn.innerText = isFav ? "❤️" : "🤍";
-            statFavoris.innerText = favorites.length;
+            document.getElementById('stat-favoris').innerText = favorites.length;
         }
         updateFavoritesUI();
 
@@ -544,26 +488,24 @@
             const index = favorites.findIndex(p => p.name === productData.name);
             if (index === -1) {
                 favorites.push(productData);
-                favoriteBtn.innerText = "❤️";
                 tg.showAlert(translations[currentLang].msg_added_fav);
             } else {
                 favorites.splice(index, 1);
-                favoriteBtn.innerText = "🤍";
                 tg.showAlert(translations[currentLang].msg_removed_fav);
             }
             localStorage.setItem('korov_favorites', JSON.stringify(favorites));
-            statFavoris.innerText = favorites.length;
+            updateFavoritesUI();
         });
 
-        openFavoritesModalBtn.addEventListener('click', () => {
+        const favoritesModal = document.getElementById('favorites-modal');
+        document.getElementById('open-favorites-modal').addEventListener('click', () => {
             if (favorites.length === 0) {
                 tg.showAlert(translations[currentLang].msg_no_fav);
                 return;
             }
             let html = "";
             favorites.forEach(item => {
-                html += `
-                <div class="bg-gray-800 border border-gray-700 rounded-2xl p-3 flex items-center justify-between">
+                html += `<div class="bg-gray-800 border border-gray-700 rounded-2xl p-3 flex items-center justify-between">
                     <div class="flex items-center gap-3">
                         <img src="${item.image}" class="w-12 h-12 rounded-xl object-cover border border-gray-600">
                         <div>
@@ -571,24 +513,15 @@
                             <p class="text-purple-400 text-xs font-bold mt-0.5">${item.price}</p>
                         </div>
                     </div>
-                    <button onclick="goToCatalogue()" class="bg-purple-600 text-white text-xs font-bold px-3 py-2 rounded-xl">${translations[currentLang].btn_view}</button>
+                    <button onclick="document.getElementById('favorites-modal').classList.add('hidden'); document.querySelector('[data-target=\\'tab-catalogue\\']').click();" class="bg-purple-600 text-white text-xs font-bold px-3 py-2 rounded-xl">${translations[currentLang].btn_view}</button>
                 </div>`;
             });
-            favoritesListContainer.innerHTML = html;
+            document.getElementById('favorites-list-container').innerHTML = html;
             favoritesModal.classList.remove('hidden');
         });
+        document.getElementById('close-favorites-modal').addEventListener('click', () => favoritesModal.classList.add('hidden'));
 
-        closeFavoritesModalBtn.addEventListener('click', () => {
-            favoritesModal.classList.add('hidden');
-        });
-
-        function goToCatalogue() {
-            favoritesModal.classList.add('hidden');
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.getElementById('tab-catalogue').classList.add('active');
-        }
-
-        // --- GESTION DU PANIER ---
+        // Panier & Quantités
         let cart = JSON.parse(localStorage.getItem('korov_cart')) || [];
         let selectedMode = 'Livraison';
         const btnDelivery = document.getElementById('btn-delivery');
@@ -609,32 +542,7 @@
         });
 
         new QRCode(document.getElementById("qrcode"), {
-            text: "https://t.me/krv420_bot",
-            width: 160, height: 160,
-            colorDark : "#000000", colorLight : "#ffffff",
-            correctLevel : QRCode.CorrectLevel.H
-        });
-
-        // --- NAVIGATION ENTRE LES ONGLETS (CORRIGÉE) ---
-        document.querySelectorAll('.nav-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const targetId = e.currentTarget.getAttribute('data-target');
-                
-                // Masquer tous les onglets
-                document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-                // Afficher l'onglet cible
-                document.getElementById(targetId).classList.add('active');
-                
-                // Réinitialiser le style de tous les boutons de la barre
-                document.querySelectorAll('.nav-btn').forEach(b => {
-                    b.classList.remove('text-purple-400');
-                    b.querySelector('.nav-avatar-border')?.classList.replace('border-purple-500', 'border-gray-500');
-                });
-                
-                // Activer le style sur le bouton cliqué
-                e.currentTarget.classList.add('text-purple-400');
-                e.currentTarget.querySelector('.nav-avatar-border')?.classList.replace('border-gray-500', 'border-purple-500');
-            });
+            text: "https://t.me/krv420_bot", width: 160, height: 160, colorDark: "#000000", colorLight: "#ffffff"
         });
 
         let selectedGram = null;
@@ -643,13 +551,12 @@
         document.querySelectorAll('.variant-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 document.querySelectorAll('.variant-btn').forEach(b => {
-                    b.classList.remove('border-purple-500', 'bg-purple-900/20');
+                    b.classList.remove('border-purple-500', 'bg-purple-900/25');
                     b.classList.add('border-gray-700', 'bg-gray-900');
                 });
                 const target = e.currentTarget;
                 target.classList.remove('border-gray-700', 'bg-gray-900');
-                target.classList.add('border-purple-500', 'bg-purple-900/20');
-                
+                target.classList.add('border-purple-500', 'bg-purple-900/25');
                 selectedGram = target.getAttribute('data-gram');
                 selectedPrice = parseInt(target.getAttribute('data-price'));
             });
@@ -657,32 +564,26 @@
 
         function updateCartUI() {
             const cartBadge = document.getElementById('cart-badge');
-            const statPanier = document.getElementById('stat-panier');
             const cartItemsDiv = document.getElementById('cart-items');
-            const cartTotalSection = document.getElementById('cart-total-section');
-            const deliverySection = document.getElementById('delivery-section');
-            const cartTotalPrice = document.getElementById('cart-total-price');
-
             localStorage.setItem('korov_cart', JSON.stringify(cart));
 
             if(cart.length > 0) {
                 cartBadge.classList.remove('hidden');
                 cartBadge.innerText = cart.length;
-                statPanier.innerText = cart.length;
-                cartTotalSection.classList.remove('hidden');
-                deliverySection.classList.remove('hidden');
+                document.getElementById('stat-panier').innerText = cart.length;
+                document.getElementById('cart-total-section').classList.remove('hidden');
+                document.getElementById('delivery-section').classList.remove('hidden');
                 
                 let html = "";
                 let total = 0;
                 cart.forEach((item, index) => {
                     total += item.price;
-                    html += `
-                    <div class="bg-gray-900 border border-gray-800 rounded-xl p-4 flex justify-between items-center text-left">
+                    html += `<div class="bg-gray-900 border border-gray-800 rounded-xl p-4 flex justify-between items-center text-left">
                         <div class="flex items-center gap-3">
                             <img src="https://i.ibb.co/4gsK2nLB/photo-2026-09-22-09-21-31.jpg" class="w-10 h-10 rounded-lg object-cover">
                             <div>
                                 <div class="font-bold text-white">${item.name}</div>
-                                <div class="text-xs text-gray-400">Quantité : <span class="text-white">${item.gram}</span></div>
+                                <div class="text-xs text-gray-400">Qté : <span class="text-white">${item.gram}</span></div>
                             </div>
                         </div>
                         <div class="flex items-center gap-3">
@@ -693,23 +594,22 @@
                 });
                 cartItemsDiv.classList.remove('text-center', 'mt-10');
                 cartItemsDiv.innerHTML = html;
-                cartTotalPrice.innerText = total + " €";
+                document.getElementById('cart-total-price').innerText = total + " €";
             } else {
                 cartBadge.classList.add('hidden');
-                statPanier.innerText = "0";
-                cartTotalSection.classList.add('hidden');
-                deliverySection.classList.add('hidden');
+                document.getElementById('stat-panier').innerText = "0";
+                document.getElementById('cart-total-section').classList.add('hidden');
+                document.getElementById('delivery-section').classList.add('hidden');
                 cartItemsDiv.classList.add('text-center', 'mt-10');
                 cartItemsDiv.innerHTML = translations[currentLang].cart_empty;
             }
         }
-
         updateCartUI();
 
-        function removeFromCart(index) {
+        window.removeFromCart = function(index) {
             cart.splice(index, 1);
             updateCartUI();
-        }
+        };
 
         document.getElementById('add-to-cart').addEventListener('click', () => {
             if(!selectedGram) {
@@ -724,15 +624,10 @@
         function sendOrderToTelegram(detailsSummary, detailsFullText, total) {
             const address = document.getElementById('order-address').value || 'Non renseignée';
             const zip = document.getElementById('order-zip').value || 'Non renseigné';
-
             let deliveryDetails = `📍 Mode : ${selectedMode}\n`;
-            if (selectedMode === 'Livraison') {
-                deliveryDetails += `🏠 Adresse : ${address}\n📮 Code Postal : ${zip}\n`;
-            }
+            if (selectedMode === 'Livraison') deliveryDetails += `🏠 Adresse : ${address}\n📮 Code Postal : ${zip}\n`;
 
-            const userInfoText = `👤 Client : ${userTelegramInfo.name}\n✈️ Telegram : ${userTelegramInfo.username}\n🆔 ID : ${userTelegramInfo.id}`;
-
-            const messageText = `🚨 NOUVELLE COMMANDE !\n\n${detailsFullText}\n💶 TOTAL : ${total} €\n\n${deliveryDetails}\n${userInfoText}\n\n🚚 Livraison : 0 € (OFFERT)\n📅 Créneaux dispo : Mardi, Vendredi ou Dimanche (12h-00h)\n\nVia Menu KOROV.420 [Lang: ${currentLang.toUpperCase()}]`;
+            const messageText = `🚨 NOUVELLE COMMANDE !\n\n${detailsFullText}\n💶 TOTAL : ${total} €\n\n${deliveryDetails}\n👤 Client : ${userTelegramInfo.name}\n✈️ Telegram : ${userTelegramInfo.username}\n🆔 ID : ${userTelegramInfo.id}\n\nVia Menu KOROV.420 [Lang: ${currentLang.toUpperCase()}]`;
 
             fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: 'POST',
@@ -740,17 +635,18 @@
                 body: JSON.stringify({ chat_id: chatId, text: messageText })
             }).then(response => {
                 if(response.ok) {
-                    addOrderToHistory(detailsSummary, total, selectedMode);
+                    let currentCount = parseInt(localStorage.getItem('korov_orders_count') || '0') + 1;
+                    localStorage.setItem('korov_orders_count', currentCount.toString());
+                    let history = JSON.parse(localStorage.getItem('korov_orders_history')) || [];
+                    history.unshift({ time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), details: detailsSummary, total: total, mode: selectedMode });
+                    localStorage.setItem('korov_orders_history', JSON.stringify(history));
+                    
                     cart = [];
                     updateCartUI();
                     tg.showAlert(translations[currentLang].msg_order_success);
-                    setTimeout(() => { tg.close(); }, 2500);
-                } else { 
-                    tg.showAlert(translations[currentLang].msg_error); 
-                }
-            }).catch(err => { 
-                tg.showAlert(translations[currentLang].msg_net_error); 
-            });
+                    setTimeout(() => tg.close(), 2500);
+                } else { tg.showAlert(translations[currentLang].msg_error); }
+            }).catch(() => tg.showAlert(translations[currentLang].msg_net_error));
         }
 
         document.getElementById('checkout-tg').addEventListener('click', () => {
@@ -758,25 +654,16 @@
                 tg.showAlert(translations[currentLang].msg_select_qty);
                 return;
             }
-            let detailsSummary = `📦 Dry-Shift 120U (${selectedGram})`;
-            let detailsFullText = `📦 Produit : Dry-Shift 120U\n⚖️ Quantité : ${selectedGram}\n💶 Prix unitaire : ${selectedPrice} €\n`;
-            sendOrderToTelegram(detailsSummary, detailsFullText, selectedPrice);
+            sendOrderToTelegram(`📦 Dry-Shift 120U (${selectedGram})`, `📦 Produit : Dry-Shift 120U\n⚖️ Quantité : ${selectedGram}\n💶 Prix : ${selectedPrice} €\n`, selectedPrice);
         });
 
         document.getElementById('checkout-cart-tg').addEventListener('click', () => {
             if(cart.length === 0) return;
-            
-            if (selectedMode === 'Livraison') {
-                const addr = document.getElementById('order-address').value.trim();
-                if(!addr) {
-                    tg.showAlert(translations[currentLang].msg_no_addr);
-                    return;
-                }
+            if (selectedMode === 'Livraison' && !document.getElementById('order-address').value.trim()) {
+                tg.showAlert(translations[currentLang].msg_no_addr);
+                return;
             }
-
-            let detailsSummary = "";
-            let detailsFullText = "";
-            let total = 0;
+            let detailsSummary = "", detailsFullText = "", total = 0;
             cart.forEach((item, i) => {
                 detailsSummary += `• ${item.name} (${item.gram}) - ${item.price}€\n`;
                 detailsFullText += `📦 Article ${i+1}: ${item.name} (${item.gram}) - ${item.price} €\n`;
