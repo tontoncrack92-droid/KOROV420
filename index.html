@@ -214,21 +214,20 @@
             </div>
         </div>
 
-        <div class="bg-gray-900 p-4 rounded-2xl border border-gray-800 mb-6 flex items-center gap-4">
-            <div class="bg-purple-900/30 w-10 h-10 flex justify-center items-center rounded-xl text-purple-400">🔔</div>
-            <div>
-                <div class="font-bold text-sm">Notifications</div>
-                <div class="text-xs text-gray-400">Sois alerté en temps réel</div>
+        <!-- Bloc Notifications Nouveautés avec interrupteur -->
+        <div class="bg-gray-900 p-4 rounded-2xl border border-gray-800 mb-6 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="bg-purple-900/30 w-10 h-10 flex justify-center items-center rounded-xl text-purple-400">🔔</div>
+                <div>
+                    <div class="font-bold text-sm">Notifications Nouveautés</div>
+                    <div class="text-xs text-gray-400">Être prévenu des arrivages</div>
+                </div>
             </div>
-        </div>
-
-        <div class="mb-6">
-            <div class="text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-2 ml-1">Ton Code</div>
-            <div class="flex gap-2">
-                <div class="bg-gray-900 border border-gray-800 rounded-xl p-3 flex-1 text-center font-mono font-bold tracking-widest text-lg text-white">39214BDB16</div>
-                <button class="bg-purple-900/20 text-purple-400 border border-purple-500/30 rounded-xl px-4 flex items-center justify-center transition active:scale-95">📋</button>
-                <button class="bg-gray-800 text-white rounded-xl px-4 flex items-center justify-center gap-2 text-sm font-bold transition active:scale-95">🔗 Partager</button>
-            </div>
+            <!-- Interrupteur (Checkbox stylée) -->
+            <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="notif-toggle" class="sr-only peer">
+                <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+            </label>
         </div>
 
         <div class="bg-white p-4 rounded-3xl flex justify-center mb-4 relative w-3/4 mx-auto shadow-lg">
@@ -298,6 +297,23 @@
 
         // Mettre à jour le texte du client dans l'onglet panier
         document.getElementById('order-user-display').innerText = `${userTelegramInfo.name} (${userTelegramInfo.username})`;
+
+        // Gestion de l'interrupteur de notifications
+        const notifToggle = document.getElementById('notif-toggle');
+
+        notifToggle.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                tg.showAlert("🔔 Pour activer les notifications, tu vas être redirigé vers le bot.");
+                const botUsername = "korov420_bot"; 
+                const alertUrl = `https://t.me/${botUsername}?start=activer_notif`;
+                
+                setTimeout(() => {
+                    window.Telegram.WebApp.openTelegramLink(alertUrl);
+                }, 1000);
+            } else {
+                tg.showAlert("🔕 Notifications désactivées.");
+            }
+        });
 
         // Gestion du Mode Livraison / Meetup
         let selectedMode = 'Livraison';
