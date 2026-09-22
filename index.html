@@ -55,7 +55,8 @@
             <div class="absolute top-3 left-3 bg-black/70 px-3 py-1 rounded-full text-xs font-bold backdrop-blur-md border border-gray-700">
                 DRY SIFT 🍇
             </div>
-            <button class="absolute top-3 right-3 bg-black/70 p-2 rounded-full text-white backdrop-blur-md border border-gray-700">
+            <!-- Bouton Favori cliquable -->
+            <button id="favorite-btn" class="absolute top-3 right-3 bg-black/70 p-2.5 rounded-full text-white backdrop-blur-md border border-gray-700 transition-all hover:scale-110">
                 🤍
             </button>
         </div>
@@ -201,7 +202,7 @@
             <div class="bg-gray-900 p-4 rounded-2xl border border-gray-800 flex items-center gap-4">
                 <div class="text-pink-500 text-2xl">🤍</div>
                 <div>
-                    <div class="text-2xl font-black">0</div>
+                    <div class="text-2xl font-black" id="stat-favoris">0</div>
                     <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Favoris</div>
                 </div>
             </div>
@@ -281,6 +282,24 @@
 
         // Mettre à jour le texte du client dans l'onglet panier
         document.getElementById('order-user-display').innerText = `${userTelegramInfo.name} (${userTelegramInfo.username})`;
+
+        // Gestion des Favoris
+        let isFavorite = false;
+        const favoriteBtn = document.getElementById('favorite-btn');
+        const statFavoris = document.getElementById('stat-favoris');
+
+        favoriteBtn.addEventListener('click', () => {
+            isFavorite = !isFavorite;
+            if (isFavorite) {
+                favoriteBtn.innerText = "❤️";
+                statFavoris.innerText = "1";
+                tg.showAlert("❤️ Ajouté aux favoris !");
+            } else {
+                favoriteBtn.innerText = "🤍";
+                statFavoris.innerText = "0";
+                tg.showAlert("🤍 Retiré des favoris.");
+            }
+        });
 
         // Gestion du Mode Livraison / Meetup
         let selectedMode = 'Livraison';
