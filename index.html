@@ -214,22 +214,6 @@
             </div>
         </div>
 
-        <!-- Bloc Notifications Nouveautés avec interrupteur -->
-        <div class="bg-gray-900 p-4 rounded-2xl border border-gray-800 mb-6 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="bg-purple-900/30 w-10 h-10 flex justify-center items-center rounded-xl text-purple-400">🔔</div>
-                <div>
-                    <div class="font-bold text-sm">Notifications Nouveautés</div>
-                    <div class="text-xs text-gray-400">Être prévenu des arrivages</div>
-                </div>
-            </div>
-            <!-- Interrupteur (Checkbox stylée) -->
-            <label class="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" id="notif-toggle" class="sr-only peer">
-                <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
-            </label>
-        </div>
-
         <div class="bg-white p-4 rounded-3xl flex justify-center mb-4 relative w-3/4 mx-auto shadow-lg">
             <div id="qrcode"></div>
             <div class="absolute inset-0 flex items-center justify-center">
@@ -298,41 +282,24 @@
         // Mettre à jour le texte du client dans l'onglet panier
         document.getElementById('order-user-display').innerText = `${userTelegramInfo.name} (${userTelegramInfo.username})`;
 
-        // Gestion de l'interrupteur de notifications (vrai bot krv420_bot)
-        const notifToggle = document.getElementById('notif-toggle');
-
-        notifToggle.addEventListener('change', (e) => {
-            if (e.target.checked) {
-                tg.showAlert("🔔 Pour activer les notifications, tu vas être redirigé vers le bot.");
-                const botUsername = "krv420_bot"; 
-                const alertUrl = `https://t.me/${botUsername}?start=activer_notif`;
-                
-                setTimeout(() => {
-                    window.Telegram.WebApp.openTelegramLink(alertUrl);
-                }, 1000);
-            } else {
-                tg.showAlert("🔕 Notifications désactivées.");
-            }
-        });
-
         // Gestion du Mode Livraison / Meetup
         let selectedMode = 'Livraison';
         const btnDelivery = document.getElementById('btn-delivery');
         const btnMeetup = document.getElementById('btn-meetup');
-        const addressFields = document.getElementById('address-fields');
+        const addressfields = document.getElementById('address-fields');
 
         btnDelivery.addEventListener('click', () => {
             selectedMode = 'Livraison';
             btnDelivery.className = "py-2 px-3 rounded-xl border border-purple-500 bg-purple-900/30 text-white font-bold text-xs flex items-center justify-center gap-1";
             btnMeetup.className = "py-2 px-3 rounded-xl border border-gray-700 bg-gray-800 text-gray-400 font-bold text-xs flex items-center justify-center gap-1";
-            addressFields.classList.remove('hidden');
+            document.getElementById('address-fields').classList.remove('hidden');
         });
 
         btnMeetup.addEventListener('click', () => {
             selectedMode = 'Meetup';
             btnMeetup.className = "py-2 px-3 rounded-xl border border-purple-500 bg-purple-900/30 text-white font-bold text-xs flex items-center justify-center gap-1";
             btnDelivery.className = "py-2 px-3 rounded-xl border border-gray-700 bg-gray-800 text-gray-400 font-bold text-xs flex items-center justify-center gap-1";
-            addressFields.classList.add('hidden');
+            document.getElementById('address-fields').classList.add('hidden');
         });
 
         // QR Code (vrai bot krv420_bot)
